@@ -1,0 +1,94 @@
+:root {
+  --color-primary: #b14141;
+  --color-secondary: #ffe66d;
+  --color-positive: #4caf50;
+  --color-bg: #fff7f0;
+  --color-text: #666;
+  --color-text-hover: #777;
+
+  --font-family-base: 'Fredoka', sans-serif;
+
+  --font-size-base: 16px;
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.5rem;
+  --font-size-h3: 2rem;
+  --font-size-h4: 1.5rem;
+  --font-size-h5: 1.2rem;
+  --font-size-sm: 0.875rem;
+  --border-radius: 1rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  color: var(--color-primary);
+  margin: 0;
+}
+
+p {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-family-base);
+  font-size: 1.5rem;
+  padding: 0.6rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  min-height: 2em;
+  min-width: 6em;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  filter: invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%);
+}
+
