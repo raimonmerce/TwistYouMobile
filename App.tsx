@@ -17,10 +17,12 @@ import Players from './src/components/pages/Players';
 import Settings from './src/components/pages/Settings';
 import ExitPopup from './src/components/popups/ExitPopup';
 import FinishScreenPopup from './src/components/popups/FinishScreenPopup';
-
+import * as Font from 'expo-font';
 import { assets } from './src/assets/assets';
+import { Colors, FontSizes, Fonts, BorderRadius } from './styles/theme';
 
 function App() {
+  const [fontsLoaded, setFontsLoaded] = React.useState(false);
   const { t } = useTranslation();
 
   const {
@@ -44,6 +46,17 @@ function App() {
 
   const { showExitPopup, handleExitClick, handleCancelExitGame, handleExitGame, showFinishScreen } = useExitHandler(setContentPage);
 
+  React.useEffect(() => {
+    (async () => {
+      await Font.loadAsync({
+        Fredoka: require('./src/assets/fonts/Fredoka.ttf'),
+      });
+      setFontsLoaded(true);
+    })();
+  }, []);
+
+  if (!fontsLoaded) return null;
+
   const renderContent = () => {
     switch (contentPage) {
       case "main":
@@ -59,47 +72,10 @@ function App() {
     }
   };
 
-  // const contentPage = 'players';
-  // const handleTest = (a: string) => {
-  //   console.log("Test", a)
-  // };
 
 
   return (
     <>
-      {/* <Header>
-        {(contentPage === 'players' || contentPage === 'settings') && (
-          <View style={styles.left}>
-            <ButtonHeader onPress={() => handleTest('main')}>
-              <Image source={assets.png.back} style={styles.icon} resizeMode="contain"/>
-            </ButtonHeader>
-          </View>
-        )}
-        {contentPage === 'main' && (
-          <View style={styles.left}>
-            <ButtonHeader onPress={() => handleTest('landing')}>
-              <Image source={assets.png.back} style={styles.icon} />
-            </ButtonHeader>
-          </View>
-        )}
-
-        <Text style={styles.title}>TwistYou</Text>
-
-        {contentPage === 'main' && (
-          <View style={styles.right}>
-            <ButtonHeader onPress={() => handleTest('settings')}>
-              <Image source={assets.png.settings} style={styles.icon} />
-            </ButtonHeader>
-          </View>
-        )}
-        {contentPage === 'game' && (
-          <View style={styles.right}>
-            <ButtonHeader onPress={() => handleTest('settings')}>
-              <Image source={assets.png.close} style={styles.icon} />
-            </ButtonHeader>
-          </View>
-        )}
-      </Header> */}
       {contentPage === 'landing' ? (
         <Landing setContentPage={setContentPage} />
       ) : (
@@ -179,11 +155,12 @@ const styles = StyleSheet.create({
     right: 16,
   },
   title: {
-    fontSize: 32, // Adjust to match --font-size-h1 in React Native
-    fontFamily: 'Fredoka', // Assuming you are loading this font
-    color: '#b14141', // --color-primary
-    marginVertical: 0,
+    fontSize: FontSizes.h2,
+    color: Colors.secondary,
+    marginTop: 32,
     marginHorizontal: 0,
+    fontFamily: 'Fredoka',
+
   },
   icon: {
     width: 32,
