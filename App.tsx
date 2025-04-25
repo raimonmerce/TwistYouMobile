@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
 import { useGameState } from './src/hooks/useGameState';
@@ -9,7 +9,7 @@ import Header from './src/components/Header';
 import Content from './src/components/Content';
 import Footer from './src/components/Footer';
 import ButtonHeader from './src/components/commons/ButtonHeader';
-import ButtonFooter from './src/components/commons/ButtonFooter';
+import ButtonBase from './src/components/commons/ButtonBase';
 import Landing from './src/components/pages/Landing';
 import Game from './src/components/pages/Game';
 import Main from './src/components/pages/Main';
@@ -19,7 +19,8 @@ import ExitPopup from './src/components/popups/ExitPopup';
 import FinishScreenPopup from './src/components/popups/FinishScreenPopup';
 import * as Font from 'expo-font';
 import { assets } from './src/assets/assets';
-import { Colors, FontSizes, Fonts, BorderRadius } from './styles/theme';
+import { Colors, FontSizes, Fonts} from './styles/theme';
+import { H2 } from './src/components/commons/Text';
 
 function App() {
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
@@ -96,7 +97,7 @@ function App() {
               </View>
             )}
 
-            <Text style={styles.title}>TwistYou</Text>
+            <H2>TwistYou</H2>
 
             {contentPage === 'main' && (
               <View style={styles.right}>
@@ -118,15 +119,15 @@ function App() {
 
           <Footer>
             {contentPage === 'main' && (
-              <ButtonFooter text={t('footer.players', 'Jugar')} onPress={handlePlay} />
+              <ButtonBase text={t('footer.players', 'Jugar')} onPress={handlePlay} />
             )}
             {contentPage === 'players' && (
-              <ButtonFooter text={t('footer.start', 'Empezar')} onPress={handleStartGame} />
+              <ButtonBase text={t('footer.start', 'Empezar')} onPress={handleStartGame} />
             )}
             {contentPage === 'game' && (
               <>
-                <ButtonFooter text={t('footer.spin', 'Girar')} onPress={handleSpin} />
-                <ButtonFooter text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} />
+                <ButtonBase text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} />
+                <ButtonBase text={t('footer.spin', 'Girar')} onPress={handleSpin} />
               </>
             )}
           </Footer>
@@ -159,8 +160,7 @@ const styles = StyleSheet.create({
     color: Colors.secondary,
     marginTop: 32,
     marginHorizontal: 0,
-    fontFamily: 'Fredoka',
-
+    fontFamily: Fonts.base
   },
   icon: {
     width: 32,

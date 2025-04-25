@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import CameraCapture from '../commons/CameraButton';
+import { H3, H4 } from '../commons/Text';
 
 interface GameProps {
   currentPlayer: string;
@@ -14,9 +15,9 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTurn, round }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.roundText}>{t('game.round', 'Round')} {round}</Text>
-      <Text style={styles.playerText}>{currentPlayer}</Text>
-      <Text style={styles.turnText}>{currentTurn}</Text>
+      <H4>{t('game.round', 'Round')} {round}</H4>
+      <H3>{currentPlayer}</H3>
+      <H4>{currentTurn}</H4>
 
       {currentTurn === t('game.masterTasks.mt1') && (
         <CameraCapture captureMode="environment" />
@@ -30,11 +31,11 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTurn, round }) => {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    // marginTop: 64, // Adjusted to match the top: 4em in CSS
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // margin: 32,
+    flex: 1,
+    marginTop: 64,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 32,
   },
   roundText: {
     fontSize: 18,

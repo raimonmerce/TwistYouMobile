@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, Switch, StyleSheet } from 'react-native';
+import { View, Switch, StyleSheet } from 'react-native';
+import { H5, BaseText } from '../commons/Text';
 
 interface SettingProps {
   name: string;
@@ -12,8 +13,8 @@ const Setting: React.FC<SettingProps> = ({ name, description, setValue, value })
   return (
     <View style={styles.setting}>
       <View style={styles.info}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <H5>{name}</H5>
+        <BaseText>{description}</BaseText>
       </View>
       <Switch
         value={value}

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Modal, View, Text, StyleSheet } from 'react-native';
+import { Modal, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { H4, BaseText } from '../commons/Text';
 
 interface FinishScreenPopupProps {
   round: number;
@@ -14,10 +15,10 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
     <Modal transparent={true} visible={visible} animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.popup}>
-          <Text style={styles.title}>{t('popup.gameFinished')}</Text>
-          <Text style={styles.message}>
+          <H4>{t('popup.gameFinished')}</H4>
+          <BaseText>
             {t('popup.roundsReached', 'You reached round')} {round}
-          </Text>
+          </BaseText>
         </View>
       </View>
     </Modal>
@@ -45,14 +46,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 20,
     elevation: 5, // for Android shadow
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  message: {
-    fontSize: 16,
-    textAlign: 'center',
-  },
+  }
 });

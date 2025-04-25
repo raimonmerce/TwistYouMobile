@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { H5, BaseText } from '../commons/Text';
 
 interface DropdownSelectorProps {
   name: string;
@@ -20,8 +21,8 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.info}>
-        <Text style={styles.title}>{name}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <H5>{name}</H5>
+        <BaseText>{description}</BaseText>
       </View>
       <View style={styles.pickerWrapper}>
         <Picker
@@ -56,15 +57,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginRight: 16,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    marginTop: 4,
-    color: '#555',
   },
   pickerWrapper: {
     borderWidth: 2,

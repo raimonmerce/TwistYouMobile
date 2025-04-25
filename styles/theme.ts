@@ -25,4 +25,3 @@ export const Colors = {
   export const BorderRadius = {
     default: 16,
   };
-  

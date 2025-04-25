@@ -1,6 +1,8 @@
 import React from 'react';
-import { Modal, View, Text, Button, StyleSheet } from 'react-native';
+import { Modal, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import ButtonBase from '../commons/ButtonBase';
+import { BaseText } from '../commons/Text';
 
 interface ExitPopupProps {
   onConfirm: () => void;
@@ -15,10 +17,10 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
     <Modal transparent={true} visible={visible} animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.popup}>
-          <Text style={styles.message}>{t('popup.confirmExit', 'Seguro que quieres salir del juego?')}</Text>
+          <BaseText>{t('popup.confirmExit', 'Seguro que quieres salir del juego?')}</BaseText>
           <View style={styles.container}>
-            <Button title={t('popup.exit', 'Salir')} onPress={onConfirm} />
-            <Button title={t('popup.cancel', 'Cancelar')} onPress={onCancel} />
+            <ButtonBase text={t('popup.exit', 'Salir')} onPress={onConfirm} />
+            <ButtonBase text={t('popup.cancel', 'Cancelar')} onPress={onCancel} />
           </View>
         </View>
       </View>

@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Page } from '../../types';
+import { H1 } from '../commons/Text';
+import ButtonBase from '../commons/ButtonBase';
 
 interface LandingProps {
   setContentPage: (value: Page) => void;
@@ -16,8 +18,8 @@ const Landing: React.FC<LandingProps> = ({ setContentPage }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>TwistYou</Text>
-      <Button title={t('footer.play')} onPress={handlePlay} />
+      <H1>TwistYou</H1>
+      <ButtonBase text={t('footer.play')} onPress={handlePlay} />
     </View>
   );
 };
@@ -28,11 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 16,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
+  }
 });
 
 export default Landing;
