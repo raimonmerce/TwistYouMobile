@@ -18,8 +18,9 @@ import ExitPopup from './src/components/popups/ExitPopup';
 import FinishScreenPopup from './src/components/popups/FinishScreenPopup';
 import * as Font from 'expo-font';
 import { assets } from './src/assets/assets';
-import { Colors, FontSizes, Fonts} from './styles/theme';
 import { H2 } from './src/components/commons/Text';
+import { Colors } from './styles/theme';
+import { ThemeProvider } from './src/components/ThemeProvider';
 
 function App() {
   const [fontsLoaded, setFontsLoaded] = React.useState(false);
@@ -75,11 +76,11 @@ function App() {
 
 
   return (
-    <>
+    <ThemeProvider>
       {contentPage === 'landing' ? (
         <Landing setContentPage={setContentPage} />
       ) : (
-        <>
+        <View style={styles.main}>
           <Header>
             {(contentPage === 'players' || contentPage === 'settings') && (
               <View style={styles.left}>
@@ -95,8 +96,9 @@ function App() {
                 </ButtonHeader>
               </View>
             )}
-
-            <H2>TwistYou</H2>
+            <View style={styles.title}>
+              <H2>TwistYou</H2>
+            </View>
 
             {contentPage === 'main' && (
               <View style={styles.right}>
@@ -130,18 +132,23 @@ function App() {
               </>
             )}
           </Footer>
-        </>
+        </View>
       )}
 
       {showExitPopup && <ExitPopup onConfirm={handleExitGame} onCancel={handleCancelExitGame} visible={showExitPopup}/>}
       {showFinishScreen && <FinishScreenPopup round={round} visible={showFinishScreen}/>}
-    </>
+    </ThemeProvider>
   );
 }
 
 export default App;
 
 const styles = StyleSheet.create({
+  main: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: Colors.background
+  },
   left: {
     position: 'absolute',
     top: '55%',
@@ -155,15 +162,12 @@ const styles = StyleSheet.create({
     right: 16,
   },
   title: {
-    fontSize: FontSizes.h2,
-    color: Colors.secondary,
-    marginTop: 32,
+    marginTop: 50,
     marginHorizontal: 0,
-    fontFamily: Fonts.base
   },
   icon: {
     width: 32,
     height: 32,
-    filter: 'invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%)', // React Native does not support filter
+    filter: 'invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%)'
   },
 });

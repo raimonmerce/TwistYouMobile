@@ -14,14 +14,14 @@ export default Footer;
 const styles = StyleSheet.create({
   footer: {
     position: 'absolute',
-    bottom: 0,
+    bottom: 20,
     left: 0,
     right: 0,
-    height: 100, // ~6em, adjust as needed
+    height: 100,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: 12, // React Native doesn't directly support gap, so use padding/margins for spacing
+    gap: 12,
     paddingHorizontal: 16,
   },
 });

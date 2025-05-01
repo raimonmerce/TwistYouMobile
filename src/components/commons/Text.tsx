@@ -4,41 +4,42 @@ import { Colors, FontSizes, Fonts } from '../../../styles/theme';
 
 interface TextProps {
     children: React.ReactNode;
+    style?: object;
 }
   
-const H1: React.FC<TextProps> = ({ children }) => {
+const H1: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.h1}>{children}</Text>
+        <Text style={[styles.h1, style]}>{children}</Text>
     );
 };
 
-const H3: React.FC<TextProps> = ({ children }) => {
+const H2: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.h3}>{children}</Text>
+        <Text style={[styles.h2, style]}>{children}</Text>
     );
 };
 
-const H4: React.FC<TextProps> = ({ children }) => {
+const H3: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.h4}>{children}</Text>
+        <Text style={[styles.h3, style]}>{children}</Text>
     );
 };
 
-const H5: React.FC<TextProps> = ({ children }) => {
+const H4: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.h5}>{children}</Text>
+        <Text style={[styles.h4, style]}>{children}</Text>
     );
 };
 
-const BaseText: React.FC<TextProps> = ({ children }) => {
+const H5: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.baseText}>{children}</Text>
+        <Text style={[styles.h5, style]}>{children}</Text>
     );
 };
 
-const H2: React.FC<TextProps> = ({ children }) => {
+const BaseText: React.FC<TextProps> = ({ children, style }) => {
     return (
-        <Text style={styles.h2}>{children}</Text>
+        <Text style={[styles.baseText, style]}>{children}</Text>
     );
 };
 

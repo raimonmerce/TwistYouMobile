@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Switch, StyleSheet } from 'react-native';
 import { H5, BaseText } from '../commons/Text';
+import { Colors, FontSizes, Fonts } from '../../../styles/theme';
 
 interface SettingProps {
   name: string;
@@ -19,8 +20,8 @@ const Setting: React.FC<SettingProps> = ({ name, description, setValue, value })
       <Switch
         value={value}
         onValueChange={setValue}
-        trackColor={{ false: '#e0e0e0', true: '#4cd137' }} // Green when true, gray when false
-        thumbColor={value ? '#fff' : '#ccc'} // White thumb color when true, gray when false
+        trackColor={{ false: Colors.text, true: Colors.primary }}
+        thumbColor={value ? Colors.input : '#ccc'} 
         style={styles.switch}
       />
     </View>
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
+    backgroundColor: Colors.background
   },
   info: {
     flex: 1,

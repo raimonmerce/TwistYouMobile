@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { H4, BaseText } from '../commons/Text';
-
+import { Colors } from '../../../styles/theme';
 interface FinishScreenPopupProps {
   round: number;
   visible: boolean;
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
   },
   popup: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.3,
     shadowRadius: 20,
-    elevation: 5, // for Android shadow
+    elevation: 5,
+    gap: 20
   }
 });

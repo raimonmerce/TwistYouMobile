@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { H5, BaseText } from '../commons/Text';
+import { Colors } from '../../../styles/theme';
 
 interface DropdownSelectorProps {
   name: string;
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
     width: '100%',
+    backgroundColor: Colors.background
   },
   info: {
     flex: 1,
@@ -60,15 +62,17 @@ const styles = StyleSheet.create({
   },
   pickerWrapper: {
     borderWidth: 2,
-    borderColor: '#007AFF', // replace with your var(--color-primary)
-    borderRadius: 6,
-    backgroundColor: '#fff',
-    minWidth: 120,
+    borderColor: Colors.primary,
+    borderRadius: 10,
+    minWidth: 100,
+    maxWidth: 120,
+    justifyContent: 'center',
+    width: 180,
+    height: 55,
+    backgroundColor: Colors.input
   },
   dropdown: {
     color: '#333',
     fontSize: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
   },
 });

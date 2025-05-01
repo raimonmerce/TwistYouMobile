@@ -1,5 +1,6 @@
 import React from "react";
-import { View, TextInput, Text, StyleSheet, ScrollView } from "react-native";
+import { View, TextInput, StyleSheet, ScrollView } from "react-native";
+import { Colors, FontSizes, Fonts} from '../../../styles/theme';
 
 interface PlayersProps {
   setPlayers: (value: string[]) => void;
@@ -33,12 +34,12 @@ const Players: React.FC<PlayersProps> = ({ players, setPlayers }) => {
 
 const styles = StyleSheet.create({
   outerContainer: {
-    // flex: 1,
-    // marginBottom: 16,
-    // paddingHorizontal: 16,
+    maxHeight: 525,
+    width: '100%',
   },
   container: {
     paddingVertical: 20,
+    paddingHorizontal: 32,
   },
   inputContainer: {
     marginBottom: 16,
@@ -49,8 +50,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     paddingHorizontal: 10,
-    fontSize: 16,
-    backgroundColor: "white",
+    backgroundColor: Colors.input,
+    fontFamily: Fonts.base,
+    fontSize: FontSizes.small,
+    color: Colors.text,
   },
 });
 

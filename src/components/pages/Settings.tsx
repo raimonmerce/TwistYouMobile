@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import DropdownSelector from "../commons/DropdownSelector";
 import Setting from "../commons/Setting"
 import { useTranslation } from "react-i18next";
-
+import { useTheme } from '../ThemeProvider';
 const Settings: React.FC = () => {
   const { t, i18n } = useTranslation();
 
   const [lenguageTag, setLenguageTag] = useState(i18n.language);
-  const [darkMode, setDarkMode] = useState(false);
-
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const lenguages = [
     { value: "es", label: t("settings.spanish", "Español") },
     { value: "en", label: t("settings.english", "English") },
@@ -36,8 +35,8 @@ const Settings: React.FC = () => {
       <Setting
         name={t("settings.darkMode", "Modo oscuro")}
         description={t('settings.darkModeDescription')}
-        setValue={setDarkMode}
-        value={darkMode}
+        setValue={() => toggleDarkMode()}
+        value={isDarkMode}
       />
     </>
   );

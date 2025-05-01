@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Page } from '../../types';
 import { H1 } from '../commons/Text';
 import ButtonBase from '../commons/ButtonBase';
-
+import { Colors } from '../../../styles/theme';
 interface LandingProps {
   setContentPage: (value: Page) => void;
 }
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 16,
+    backgroundColor: Colors.background
   }
 });
 
