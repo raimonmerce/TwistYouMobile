@@ -1,10 +1,9 @@
 import React from 'react';
+import './i18n/i18n'; 
 import { View, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
-
 import { useGameState } from './src/hooks/useGameState';
 import { useExitHandler } from './src/hooks/useExitHandler';
-
 import Header from './src/components/Header';
 import Content from './src/components/Content';
 import Footer from './src/components/Footer';

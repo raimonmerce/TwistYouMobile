@@ -21,14 +21,8 @@ const Settings: React.FC = () => {
   };
 
   useEffect(() => {
-    i18n.on("languageChanged", (lang) => {
-      setLenguageTag(lang);
-    });
-
-    return () => {
-      i18n.off("languageChanged");
-    };
-  }, [i18n]);
+    setLenguageTag(i18n.language);
+  }, [i18n.language]); 
 
   return (
     <>
