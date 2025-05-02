@@ -39,7 +39,7 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
     },
     pickerWrapper: {
       borderWidth: 2,
-      borderColor: colors.primary,
+      borderColor: colors.secondary,
       borderRadius: 10,
       minWidth: 100,
       maxWidth: 120,

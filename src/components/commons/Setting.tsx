@@ -52,7 +52,7 @@ const Setting: React.FC<SettingProps> = ({ name, description, setValue, value })
       <Switch
         value={value}
         onValueChange={setValue}
-        trackColor={{ false: colors.text, true: colors.primary }}
+        trackColor={{ false: colors.text, true: colors.secondary }}
         thumbColor={value ? colors.text : '#ccc'} 
         style={styles.switch}
       />

@@ -31,8 +31,8 @@ const Players: React.FC<PlayersProps> = ({ players, setPlayers }) => {
     },
     input: {
       height: 40,
-      borderColor: "#ccc",
-      borderWidth: 1,
+      borderColor: colors.secondary,
+      borderWidth: 2,
       borderRadius: 6,
       paddingHorizontal: 10,
       backgroundColor: colors.input,
@@ -50,6 +50,7 @@ const Players: React.FC<PlayersProps> = ({ players, setPlayers }) => {
             <TextInput
               style={styles.input}
               placeholder={`Player ${index + 1}`}
+              placeholderTextColor={colors.textHover}
               value={player}
               onChangeText={(value) => handleInputChange(value, index)}
             />
