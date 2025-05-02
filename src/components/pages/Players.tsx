@@ -1,6 +1,7 @@
 import React from "react";
 import { View, TextInput, StyleSheet, ScrollView } from "react-native";
-import { Colors, FontSizes, Fonts} from '../../../styles/theme';
+import { FontSizes, Fonts} from '../../../styles/theme';
+import { useTheme } from '../ThemeProvider';
 
 interface PlayersProps {
   setPlayers: (value: string[]) => void;
@@ -13,6 +14,33 @@ const Players: React.FC<PlayersProps> = ({ players, setPlayers }) => {
     updatedPlayers[index] = value;
     setPlayers(updatedPlayers);
   };
+
+  const { colors } = useTheme();
+  
+  const styles = StyleSheet.create({
+    outerContainer: {
+      maxHeight: 525,
+      width: '100%',
+    },
+    container: {
+      paddingVertical: 20,
+      paddingHorizontal: 32,
+    },
+    inputContainer: {
+      marginBottom: 16,
+    },
+    input: {
+      height: 40,
+      borderColor: "#ccc",
+      borderWidth: 1,
+      borderRadius: 6,
+      paddingHorizontal: 10,
+      backgroundColor: colors.input,
+      fontFamily: Fonts.base,
+      fontSize: FontSizes.small,
+      color: colors.text,
+    },
+  });
 
   return (
     <View style={styles.outerContainer}>
@@ -31,30 +59,5 @@ const Players: React.FC<PlayersProps> = ({ players, setPlayers }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  outerContainer: {
-    maxHeight: 525,
-    width: '100%',
-  },
-  container: {
-    paddingVertical: 20,
-    paddingHorizontal: 32,
-  },
-  inputContainer: {
-    marginBottom: 16,
-  },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    borderRadius: 6,
-    paddingHorizontal: 10,
-    backgroundColor: Colors.input,
-    fontFamily: Fonts.base,
-    fontSize: FontSizes.small,
-    color: Colors.text,
-  },
-});
 
 export default Players;

@@ -3,7 +3,8 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import CameraCapture from '../commons/CameraButton';
 import { H2, H3, H4 } from '../commons/Text';
-import { Colors } from '../../../styles/theme';
+import { useTheme } from '../ThemeProvider';
+
 interface GameProps {
   currentPlayer: string;
   currentTurn: string;
@@ -18,6 +19,24 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTurn, round }) => {
 
   if (!mt1 || !mt2) return null; 
 
+  const { colors } = useTheme();
+
+  const styles = StyleSheet.create({
+    container: {
+      marginTop: 64,
+      alignItems: 'center',
+      margin: 32
+    },
+    playerText: {
+      marginTop: 16,
+      textAlign: 'center'
+    },
+    turnText: {
+      marginTop: 64,
+      textAlign: 'center'
+    },
+  });
+
   return (
     <View style={styles.container}>
       <H3>{t('game.round', 'Round')} {round}</H3>
@@ -29,22 +48,5 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTurn, round }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 64,
-    alignItems: 'center',
-    margin: 32,
-    backgroundColor: Colors.background
-  },
-  playerText: {
-    marginTop: 16,
-    textAlign: 'center'
-  },
-  turnText: {
-    marginTop: 64,
-    textAlign: 'center'
-  },
-});
 
 export default Game;

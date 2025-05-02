@@ -1,80 +1,96 @@
 import React from "react";
-import { Text, StyleSheet } from 'react-native';
-import { Colors, FontSizes, Fonts } from '../../../styles/theme';
+import { Text, TextStyle } from 'react-native';
+import { FontSizes, Fonts } from '../../../styles/theme';
+import { useTheme } from '../ThemeProvider';
 
 interface TextProps {
-    children: React.ReactNode;
-    style?: object;
+  children: React.ReactNode;
+  style?: TextStyle;
 }
-  
+
 const H1: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
     return (
-        <Text style={[styles.h1, style]}>{children}</Text>
-    );
+        <Text 
+            style={[{
+                fontFamily: Fonts.base,
+                fontSize: FontSizes.h1,
+                color: colors.primary,
+            }, style]}
+        >
+            {children}
+        </Text>
+    )
 };
 
 const H2: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
     return (
-        <Text style={[styles.h2, style]}>{children}</Text>
-    );
-};
-
-const H3: React.FC<TextProps> = ({ children, style }) => {
-    return (
-        <Text style={[styles.h3, style]}>{children}</Text>
-    );
-};
-
-const H4: React.FC<TextProps> = ({ children, style }) => {
-    return (
-        <Text style={[styles.h4, style]}>{children}</Text>
-    );
-};
-
-const H5: React.FC<TextProps> = ({ children, style }) => {
-    return (
-        <Text style={[styles.h5, style]}>{children}</Text>
-    );
-};
-
-const BaseText: React.FC<TextProps> = ({ children, style }) => {
-    return (
-        <Text style={[styles.baseText, style]}>{children}</Text>
-    );
-};
-
-export {H1, H2, H3, H4, H5, BaseText};
-
-const styles = StyleSheet.create({
-    h1: {
-        fontFamily: Fonts.base,
-        fontSize: FontSizes.h1,
-        color: Colors.primary,
-    },
-    h2: {
+  <Text
+    style={[{
         fontFamily: Fonts.base,
         fontSize: FontSizes.h2,
-        color: Colors.primary,
-    },
-    h3: {
-        fontFamily: Fonts.base,
-        fontSize: FontSizes.h3,
-        color: Colors.secondary,
-    },
-    h4: {
-        fontFamily: Fonts.base,
-        fontSize: FontSizes.h4,
-        color: Colors.text,
-    },
-    h5: {
-        fontFamily: Fonts.base,
-        fontSize: FontSizes.h5,
-        color: Colors.text,
-    },
-    baseText: {
-        fontFamily: Fonts.base,
-        fontSize: FontSizes.small,
-        color: Colors.text,
-    }
-});
+        color: colors.primary,
+    }, style]}
+  >
+    {children}
+  </Text>
+)};
 
+const H3: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
+    return (
+    <Text
+        style={[{
+            fontFamily: Fonts.base,
+            fontSize: FontSizes.h3,
+            color: colors.secondary,
+        }, style]}
+    >
+        {children}
+    </Text>
+)};
+
+const H4: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
+    return (
+    <Text 
+        style={[{
+            fontFamily: Fonts.base,
+            fontSize: FontSizes.h4,
+            color: colors.text,
+        }, style]}
+    >
+        {children}
+    </Text>
+)};
+
+const H5: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
+    return (
+    <Text
+        style={[{
+            fontFamily: Fonts.base,
+            fontSize: FontSizes.h5,
+            color: colors.text,
+        }, style]}
+    >
+        {children}
+    </Text>
+)};
+
+const BaseText: React.FC<TextProps> = ({ children, style }) => {
+    const { colors } = useTheme();
+    return (
+    <Text
+        style={[{
+            fontFamily: Fonts.base,
+            fontSize: FontSizes.small,
+            color: colors.text,
+        }, style]}
+    >
+        {children}
+    </Text>
+)};
+
+export { H1, H2, H3, H4, H5, BaseText };

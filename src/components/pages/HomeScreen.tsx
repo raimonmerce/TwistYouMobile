@@ -5,14 +5,14 @@ import { useTranslation } from "react-i18next";
 import { MAX_PLAYERS } from "../../constants";
 import { GameSettings } from "../../types";
 
-interface MainProps {
+interface HomeScreenProps {
   setNumberPlayers: (value: number) => void;
   numberPlayers: number;
   setSettings: (value: GameSettings) => void;
   settings: GameSettings;
 }
 
-const Main: React.FC<MainProps>  = ({
+const HomeScreen: React.FC<HomeScreenProps>  = ({
   setNumberPlayers,
   numberPlayers,
   setSettings,
@@ -78,4 +78,4 @@ const Main: React.FC<MainProps>  = ({
   );
 };
 
-export default Main;
+export default HomeScreen;

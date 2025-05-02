@@ -1,13 +1,4 @@
 // theme.js
-export const Colors = {
-    primary: '#b14141',
-    secondary: '#ffe66d',
-    positive: '#4caf50',
-    background: '#fff7f0',
-    input: '#ffffff',
-    text: '#666',
-    textHover: '#777',
-  };
 
   export const lightColors = {
     primary: '#b14141',

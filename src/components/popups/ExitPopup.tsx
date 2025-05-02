@@ -3,7 +3,7 @@ import { Modal, View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ButtonBase from '../commons/ButtonBase';
 import { BaseText } from '../commons/Text';
-import { Colors } from '../../../styles/theme';
+import { useTheme } from '../ThemeProvider';
 
 interface ExitPopupProps {
   onConfirm: () => void;
@@ -13,6 +13,40 @@ interface ExitPopupProps {
 
 const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) => {
   const { t } = useTranslation();
+
+  const { colors } = useTheme();
+  
+  const styles = StyleSheet.create({
+    overlay: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    },
+    popup: {
+      backgroundColor: colors.background,
+      padding: 20,
+      borderRadius: 10,
+      alignItems: 'center',
+      width: '80%',
+      maxWidth: 300,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 10 },
+      shadowOpacity: 0.3,
+      shadowRadius: 20,
+      elevation: 5,
+    },
+    message: {
+      fontSize: 16,
+      marginBottom: 20,
+    },
+    container: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      width: '100%',
+      marginTop: 20
+    },
+  });
 
   return (
     <Modal transparent={true} visible={visible} animationType="fade">
@@ -30,35 +64,3 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
 };
 
 export default ExitPopup;
-
-const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-  },
-  popup: {
-    backgroundColor: Colors.background,
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '80%',
-    maxWidth: 300,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 20,
-    elevation: 5,
-  },
-  message: {
-    fontSize: 16,
-    marginBottom: 20,
-  },
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginTop: 20
-  },
-});
