@@ -9,6 +9,7 @@ export const useGameState = () => {
     const [players, setPlayers] = useState<string[]>([]);
     const [numberPlayers, setNumberPlayers] = useState(4);
     const [settings, setSettings] = useState<GameSettings>({
+        adultMode: false,
         colorMode: false,
         alcoholMode: false,
         extremoMode: false,

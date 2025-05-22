@@ -86,8 +86,10 @@ export const cat = {
     "settings": {
         "language": "Idioma",
         "darkMode": "Mode fosc",
+        "eighteen": "Modo adultos",
         "languageDescription": "Selecciona l'idioma de l'aplicació 🗣️",
         "darkModeDescription": "Activa el mode fosc 🌙",
+        "eighteenDescription": "Permet utilitzar els modes de joc +18",
         "spanish": "Espanyol",
         "catalan": "Català",
         "english": "Inglès"

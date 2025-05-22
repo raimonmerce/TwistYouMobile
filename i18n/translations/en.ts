@@ -85,8 +85,10 @@ export const en = {
     "settings": {
         "language": "Lenguage",
         "darkMode": "Darkmode",
+        "eighteen": "Adult Mode",
         "languageDescription": "Select the app lenguage 🗣️",
         "darkModeDescription": "Activate Dark Mode 🌙",
+        "eighteenDescription": "Allows to play with the +18 modes",
         "spanish": "Spanish",
         "catalan": "Catalan",
         "english": "English"

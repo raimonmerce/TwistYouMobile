@@ -49,18 +49,20 @@ const HomeScreen: React.FC<HomeScreenProps>  = ({
         setValue={(value) => handleToggle("colorMode", value)} 
         value={settings.colorMode} 
       />
-      <Setting 
-        name={t('main.alcohol', 'Alcohol')}
-        description={t('main.alcoholDescription')}  
-        setValue={(value) => handleToggle("alcoholMode", value)} 
-        value={settings.alcoholMode} 
-      />
-      <Setting 
-        name={t('main.extreme', 'Extremo')}
-        description={t('main.extremeDescription')}  
-        setValue={(value) => handleToggle("extremoMode", value)} 
-        value={settings.extremoMode} 
-      />
+      {settings.adultMode && <>
+        <Setting 
+          name={t('main.alcohol', 'Alcohol')}
+          description={t('main.alcoholDescription')}  
+          setValue={(value) => handleToggle("alcoholMode", value)} 
+          value={settings.alcoholMode} 
+        />
+        <Setting 
+          name={t('main.extreme', 'Extremo')}
+          description={t('main.extremeDescription')}  
+          setValue={(value) => handleToggle("extremoMode", value)} 
+          value={settings.extremoMode} 
+        />
+      </>}
       <Setting 
         name={t('main.master', 'Master')}
         description={t('main.masterDescription')}  

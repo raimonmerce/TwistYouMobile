@@ -1,4 +1,5 @@
 export type GameSettings = {
+  adultMode: boolean;
   colorMode: boolean;
   alcoholMode: boolean;
   extremoMode: boolean;

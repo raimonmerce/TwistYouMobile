@@ -3,7 +3,17 @@ import DropdownSelector from "../commons/DropdownSelector";
 import Setting from "../commons/Setting"
 import { useTranslation } from "react-i18next";
 import { useTheme } from '../ThemeProvider';
-const Settings: React.FC = () => {
+import { GameSettings } from "../../types";
+
+interface SettingsProps {
+  setSettings: (value: GameSettings) => void;
+  settings: GameSettings;
+}
+
+const Settings: React.FC<SettingsProps> = ({
+  setSettings,
+  settings
+}) => {
   const { t, i18n } = useTranslation();
 
   const [lenguageTag, setLenguageTag] = useState(i18n.language);
@@ -37,6 +47,15 @@ const Settings: React.FC = () => {
         description={t('settings.darkModeDescription')}
         setValue={() => toggleDarkMode()}
         value={isDarkMode}
+      />
+      <Setting
+        name={t("settings.eighteen", "Opciones +18")}
+        description={t('settings.eighteenDescription')}
+        setValue={(value: boolean) => setSettings({
+          ...settings,
+          ["adultMode"]: value,
+        })}
+        value={settings.adultMode}
       />
     </>
   );
