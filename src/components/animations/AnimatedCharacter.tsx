@@ -2,13 +2,16 @@ import React, { useRef, useEffect, useState } from "react";
 import { Animated, StyleSheet, ImageSourcePropType } from "react-native";
 import { characterSprites } from "./characterSprites";
 import { characterAnimations } from "./characterAnimations";
+import { CharacterImageAnimation } from "../../types";
 
 interface AnimatedCharacterProps {
   triggerKey: string | number;
 }
 
 const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => {
-  const animation = characterAnimations.spinIn;
+  const [animation, setAnimation] = useState<CharacterImageAnimation>(
+    characterAnimations.appearLeft
+  );
 
   const positionY = useRef(new Animated.Value(animation?.initial.position.y ?? 0)).current;
   const positionX = useRef(new Animated.Value(animation?.initial.position.x ?? 0)).current;
@@ -18,7 +21,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
 
   const colorKeys = Object.keys(characterSprites);
   const imageOptions = colorKeys.map(
-    color => characterSprites[color].pose2
+    color => characterSprites[color].drunk
   );
   
   const [imageSource, setImageSource] = useState<ImageSourcePropType>(imageOptions[0]);
@@ -57,7 +60,16 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
         } while (next === prev);
         return next;
       });
-      runAnimation(initial, final, duration);
+      const animationKeys = Object.keys(characterAnimations);
+      const nextAnimationKey = animationKeys[Math.floor(Math.random() * animationKeys.length)];
+      const nextAnimation = characterAnimations[nextAnimationKey];
+      setAnimation(nextAnimation);
+      positionY.setValue(nextAnimation.initial.position.y);
+      positionX.setValue(nextAnimation.initial.position.x);
+      scale.setValue(nextAnimation.initial.scale);
+      rotation.setValue(nextAnimation.initial.rotation);
+      opacity.setValue(nextAnimation.initial.opacity);
+      runAnimation(nextAnimation.initial, nextAnimation.final, duration);
     });
   };
 
@@ -81,6 +93,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
 							{ translateX: positionX },
 							{ translateY: positionY },
 							{ rotate: rotateInterpolate },
+              { scale: scale }
 					],
 				},
 			]}
@@ -90,6 +103,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
 
 const styles = StyleSheet.create({
   image: {
+    position: "absolute",
     width: 600,
     height: 600,
     resizeMode: "contain",
