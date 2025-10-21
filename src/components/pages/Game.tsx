@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { View, Animated, Image, StyleSheet, Dimensions } from "react-native";
-import AnimatedCharacter from './AnimatedCharacter';
+import AnimatedCharacter from '../animations/AnimatedCharacter';
 import { useTranslation } from 'react-i18next';
 import CameraCapture from '../commons/CameraButton';
 import { H2, H3, H4 } from '../commons/Text';
