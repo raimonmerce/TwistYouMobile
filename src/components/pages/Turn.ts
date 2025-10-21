@@ -1,4 +1,4 @@
-import { GameSettings } from "../../types";
+import { GameSettings, Task } from "../../types";
 import { MIN_DRINKS, MAX_DRINKS } from "../../constants";
 import { DataManager } from "../../data/DataManager";
 
@@ -6,8 +6,8 @@ type TranslateFunction = (key: string, options?: any) => string;
 
 export default class Turn {
   private players: string[];
-  private tasks: string[];
-  private taskMaster: string[];
+  private tasks: Task[];
+  private taskMaster: Task[];
   private parts: string[];
   private basicTask: string;
   private of: string;
@@ -50,13 +50,35 @@ export default class Turn {
   }
 
   generateText(player: string): string {
-    const text =
+    const task: Task =
       player === 'Master'
         ? this.getRandomElement(this.taskMaster)
         : Math.random() < 0.5
-          ? `${this.t(this.basicTask)} ${this.t(this.of)}`
+          ? {
+              type: "general",
+              text: `${this.t(this.basicTask)} ${this.t(this.of)}`,
+            }
           : this.getRandomElement(this.tasks);
   
-    return this.capitalizeFirstLetter(this.getFullSentence(text, player));
+    return this.capitalizeFirstLetter(this.getFullSentence(task.text, player));
+  }
+
+  generateTask(player: string): Task {
+    const isMaster = player === "Master";
+
+    const task: Task = isMaster
+      ? this.getRandomElement(this.taskMaster)
+      : Math.random() < 0.5
+        ? {
+            type: "general",
+            text: `${this.t(this.basicTask)} ${this.t(this.of)}`,
+          }
+        : this.getRandomElement(this.tasks);
+
+    const text = this.capitalizeFirstLetter(
+      this.getFullSentence(task.text, player)
+    );
+
+    return { ...task, text };
   }
 }

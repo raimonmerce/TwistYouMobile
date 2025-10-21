@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import Turn from "../components/pages/Turn";
-import { GameSettings, Page } from "../types";
+import { GameSettings, Page, Task } from "../types";
 
 export const useGameState = () => {
     const { t } = useTranslation();
@@ -16,13 +16,13 @@ export const useGameState = () => {
         masterMode: false,
     });
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
-    const [currentTurn, setCurrentTurn] = useState("");
+    const [currentTask, setCurrentTask] = useState<Task | null>(null);
     const [turn, setTurn] = useState<Turn | null>(null);
     const [round, setRound] = useState(1);
 
-    const getTurn = (player: string, turn: Turn | null) => {
-        if (!turn) return "";
-        return turn.generateText(player);
+    const getTask = (player: string, turn: Turn | null) => {
+        if (!turn) return null;
+        return turn.generateTask(player);
     };
 
     const handlePlay = () => {
@@ -53,14 +53,14 @@ export const useGameState = () => {
         setTurn(turnTmp);
         setPlayers(newPlayers);
         setCurrentPlayerIndex(0);
-        setCurrentTurn(getTurn(newPlayers[0], turnTmp));
+        setCurrentTask(getTask(newPlayers[0], turnTmp));
     };
 
     useEffect(() => {
-        if (round === 1 && currentPlayerIndex === 0 && turn && currentTurn) {
+        if (round === 1 && currentPlayerIndex === 0 && turn && currentTask) {
           setContentPage("game");
         }
-      }, [round, turn, currentPlayerIndex, currentTurn]);
+      }, [round, turn, currentPlayerIndex, currentTask]);
       
 
     const handleSpin = () => {
@@ -68,11 +68,11 @@ export const useGameState = () => {
         if (nextIndex === 0) setRound(round + 1);
         const playerName = players[nextIndex];
         setCurrentPlayerIndex(nextIndex);
-        setCurrentTurn(getTurn(playerName, turn));
+        setCurrentTask(getTask(playerName, turn));
     };
 
     const handleImpossible = () => {
-        setCurrentTurn(getTurn(players[currentPlayerIndex], turn));
+        setCurrentTask(getTask(players[currentPlayerIndex], turn));
     };
 
     const handleGoToPage = (page: Page) => {
@@ -89,7 +89,7 @@ export const useGameState = () => {
     settings,
     setSettings,
     currentPlayerIndex,
-    currentTurn,
+    currentTask,
     round,
     handlePlay,
     handleStartGame,

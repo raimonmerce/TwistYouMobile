@@ -34,7 +34,7 @@ const Main: React.FC<MainProps> = ({}) => {
         settings,
         setSettings,
         currentPlayerIndex,
-        currentTurn,
+        currentTask,
         round,
         handlePlay,
         handleStartGame,
@@ -54,7 +54,7 @@ const Main: React.FC<MainProps> = ({}) => {
             case "players":
             return <Players players={players} setPlayers={setPlayers} />;
             case "game":
-            return <Game currentPlayer={players[currentPlayerIndex]} currentTurn={currentTurn} round={round} />;
+            return <Game currentPlayer={players[currentPlayerIndex]} currentTask={currentTask} round={round} />;
             case "settings":
             return <Settings settings={settings} setSettings={setSettings}/>;
             default:

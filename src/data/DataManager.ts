@@ -1,28 +1,33 @@
 import { dataMap } from './Data'
-import { GameSettings } from '../types'
+import { GameSettings, Task } from '../types'
 
 export class DataManager {
-    static getTasks(settings: GameSettings): string[] {
-        const tasks = [...dataMap.generalTasks];
+    static getTasks(settings: GameSettings): Task[] {
+        const tasks: Task[] = [];
+
+        tasks.push(...dataMap.generalTasks.map(text => ({ type: "general" as const, text })));
+
         if (settings.colorMode) {
-            tasks.push(...dataMap.colorTasks);
+            tasks.push(...dataMap.colorTasks.map(text => ({ type: "color" as const, text })));
         }
+
         if (settings.extremoMode) {
-            tasks.push(...dataMap.extremeTasks);
+            tasks.push(...dataMap.extremeTasks.map(text => ({ type: "extreme" as const, text })));
         }
+
         if (settings.alcoholMode) {
-            tasks.push(...dataMap.alcoholTasks);
+            tasks.push(...dataMap.alcoholTasks.map(text => ({ type: "alcohol" as const, text })));
         }
         return tasks;
     }
 
-    static getTasksMasters(settings: GameSettings): string[] {
-        const tasksMaster = [];
+    static getTasksMasters(settings: GameSettings): Task[] {
+        const tasksMaster: Task[] = [];
         if (settings.masterMode) {
-            tasksMaster.push(...dataMap.masterTasks);
+            tasksMaster.push(...dataMap.masterTasks.map(text => ({ type: "master" as const, text })));
         }
         if (settings.masterMode && settings.extremoMode) {
-            tasksMaster.push(...dataMap.masterExtremeTasks);
+            tasksMaster.push(...dataMap.masterExtremeTasks.map(text => ({ type: "masterExtreme" as const, text })));
         }
         return tasksMaster;
     }
