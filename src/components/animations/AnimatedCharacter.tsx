@@ -12,7 +12,6 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
   const [animation, setAnimation] = useState<CharacterImageAnimation>(
     characterAnimations.appearLeft
   );
-  console.log("AAA")
   const positionY = useRef(new Animated.Value(animation?.initial.position.y ?? 0)).current;
   const positionX = useRef(new Animated.Value(animation?.initial.position.x ?? 0)).current;
   const scale = useRef(new Animated.Value(animation?.initial.scale ?? 1)).current;
@@ -53,7 +52,6 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
       Animated.timing(rotation, { toValue: to.rotation, duration, useNativeDriver: true }),
       Animated.timing(opacity, { toValue: to.opacity, duration, useNativeDriver: true }),
     ]).start();
-    console.log("BBB")
   };
 
   const animateOutThenIn = () => {
@@ -83,7 +81,6 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
   };
 
   useEffect(() => {
-    console.log("triggerKey", newTask)
     if (animation) animateOutThenIn();
   }, [newTask]);
 
