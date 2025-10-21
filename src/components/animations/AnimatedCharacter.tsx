@@ -2,17 +2,17 @@ import React, { useRef, useEffect, useState } from "react";
 import { Animated, StyleSheet, ImageSourcePropType } from "react-native";
 import { characterSprites } from "./characterSprites";
 import { characterAnimations } from "./characterAnimations";
-import { CharacterImageAnimation } from "../../types";
+import { CharacterImageAnimation, Task } from "../../types";
 
 interface AnimatedCharacterProps {
-  triggerKey: string | number;
+  newTask: Task;
 }
 
-const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => {
+const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
   const [animation, setAnimation] = useState<CharacterImageAnimation>(
     characterAnimations.appearLeft
   );
-
+  console.log("AAA")
   const positionY = useRef(new Animated.Value(animation?.initial.position.y ?? 0)).current;
   const positionX = useRef(new Animated.Value(animation?.initial.position.x ?? 0)).current;
   const scale = useRef(new Animated.Value(animation?.initial.scale ?? 1)).current;
@@ -20,11 +20,24 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
   const opacity = useRef(new Animated.Value(animation?.initial.opacity ?? 1)).current;
 
   const colorKeys = Object.keys(characterSprites);
-  const imageOptions = colorKeys.map(
-    color => characterSprites[color].drunk
-  );
   
-  const [imageSource, setImageSource] = useState<ImageSourcePropType>(imageOptions[0]);
+  const getImageSourceForKey = (key: string): ImageSourcePropType => {
+    const color = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+    const sprites = characterSprites[color];
+
+    const text = String(key).toLowerCase();
+
+    if (text.includes("alcohol") || text.includes("drink")) {
+      return sprites.drunk;
+    } else if (text.includes("extreme")) {
+      return sprites.extreme;
+    } else {
+      const poses = [sprites.pose1, sprites.pose2];
+      return poses[Math.floor(Math.random() * poses.length)];
+    }
+  };
+  
+  const [imageSource, setImageSource] = useState<ImageSourcePropType>(getImageSourceForKey(newTask.type));
 
   const runAnimation = (from: typeof animation.initial, to: typeof animation.final, duration: number) => {
     positionY.setValue(from.position.y);
@@ -40,6 +53,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
       Animated.timing(rotation, { toValue: to.rotation, duration, useNativeDriver: true }),
       Animated.timing(opacity, { toValue: to.opacity, duration, useNativeDriver: true }),
     ]).start();
+    console.log("BBB")
   };
 
   const animateOutThenIn = () => {
@@ -53,13 +67,8 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
       Animated.timing(rotation, { toValue: initial.rotation, duration, useNativeDriver: true }),
       Animated.timing(opacity, { toValue: initial.opacity, duration, useNativeDriver: true }),
     ]).start(() => {
-      setImageSource(prev => {
-        let next;
-        do {
-          next = imageOptions[Math.floor(Math.random() * imageOptions.length)];
-        } while (next === prev);
-        return next;
-      });
+      const newImage = getImageSourceForKey(newTask.type);
+      setImageSource(newImage);
       const animationKeys = Object.keys(characterAnimations);
       const nextAnimationKey = animationKeys[Math.floor(Math.random() * animationKeys.length)];
       const nextAnimation = characterAnimations[nextAnimationKey];
@@ -74,8 +83,9 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ triggerKey }) => 
   };
 
   useEffect(() => {
+    console.log("triggerKey", newTask)
     if (animation) animateOutThenIn();
-  }, [triggerKey]);
+  }, [newTask]);
 
 	const rotateInterpolate = rotation.interpolate({
 		inputRange: [0, 360],

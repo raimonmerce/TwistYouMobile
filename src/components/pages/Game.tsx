@@ -100,7 +100,7 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
 
   return (
     <View style={styles.container}>
-      <AnimatedCharacter triggerKey={currentTask.text} />
+      <AnimatedCharacter newTask={currentTask} />
 
       {/* Round */}
       <Animated.View
