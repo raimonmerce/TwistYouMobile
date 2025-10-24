@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "TwistYouMobile",
-    "slug": "TwistYouMobile",
+    "name": "TwistYou",
+    "slug": "TwistYou",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,7 +20,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#88bdff"
       },
-      "package": "com.raimon.TwistYouMobile"
+      "package": "com.raimon.TwistYou",
+      "androidNavigationBar": {
+        "visible": "sticky-immersive",
+        "barStyle": "light-content",
+        "backgroundColor": "transparent"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

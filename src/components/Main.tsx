@@ -5,8 +5,9 @@ import ButtonHeader from './commons/ButtonHeader';
 import ButtonBase from './commons/ButtonBase';
 import { assets } from '../assets/assets';
 import { H2 } from './commons/Text';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, BackHandler } from 'react-native';
 import { useTheme } from './ThemeProvider';
+import { useEffect } from 'react';
 import Game from './pages/Game';
 import HomeScreen from './pages/HomeScreen';
 import Players from './pages/Players';
@@ -63,6 +64,23 @@ const Main: React.FC<MainProps> = ({}) => {
     };
 
     const { colors } = useTheme();
+
+    useEffect(() => {
+        const backAction = () => {
+            if (contentPage === 'landing') return true;
+            if (contentPage === 'players' || contentPage === 'settings') handleGoToPage('main');
+            else if(contentPage === 'main') handleGoToPage('landing');
+            else if (contentPage === 'game') handleExitClick();
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, [contentPage, handleExitClick]);
 
     const styles = StyleSheet.create({
         main: {

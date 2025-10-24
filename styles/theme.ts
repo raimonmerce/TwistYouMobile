@@ -19,6 +19,17 @@
     text: '#eee',
     textHover: '#ccc',
   };
+
+  export const colors = {
+    lightBlue: "#88bdff",
+    lightRed: "#ff4d99",
+    lightGreen: "#a4ffdd",
+    lightYellow: "#ffe77d",
+    darkBlue: "#3280f3",
+    darkRed: "#ad0568",
+    darkGreen: "#47ffbd",
+    darkYellow: "#ffdb3e"
+  }
   
   export const FontSizes = {
     base: 16,
