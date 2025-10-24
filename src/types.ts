@@ -38,3 +38,13 @@ export type CharacterSprites = {
   drunk: ImageSourcePropType;
   extreme: ImageSourcePropType;
 };
+
+const lightBlue = "88bdff"
+const lightRed = "ff4d99"
+const lightGreen = "a4ffdd"
+const lightYellow = "ffe77d"
+
+const darkBlue = "3280f3"
+const darkRed = "ad0568"
+const darkGreen = "47ffbd"
+const darkYellow = "ffdb3e"
