@@ -5,7 +5,7 @@ import { Page } from '../../types';
 import { H1 } from '../commons/Text';
 import ButtonBase from '../commons/ButtonBase';
 import { useTheme } from '../ThemeProvider';
-import mainImage from "../../assets/png/concepts/main.png";
+import { assets } from '../../assets/assets';
 
 interface LandingProps {
   setContentPage: (value: Page) => void;
@@ -45,7 +45,7 @@ const Landing: React.FC<LandingProps> = ({ setContentPage }) => {
         <H1>TwistYou</H1>
 
         <Image 
-          source={mainImage}
+          source={assets.png.main}
           style={{ width: 400, height: 400, resizeMode: "contain" }}
         />
 

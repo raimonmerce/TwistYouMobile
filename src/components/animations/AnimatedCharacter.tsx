@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Animated, StyleSheet, ImageSourcePropType } from "react-native";
-import { characterSprites } from "./characterSprites";
+import { assets } from '../../assets/assets';
 import { characterAnimations } from "./characterAnimations";
 import { CharacterImageAnimation, Task } from "../../types";
 
@@ -18,13 +18,14 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
   const rotation = useRef(new Animated.Value(animation?.initial.rotation ?? 0)).current;
   const opacity = useRef(new Animated.Value(animation?.initial.opacity ?? 1)).current;
 
-  const colorKeys = Object.keys(characterSprites);
+  const colorKeys = ["yellow", "red", "green", "blue"] as const;
   
-  const getImageSourceForKey = (key: string): ImageSourcePropType => {
-    const color = colorKeys[Math.floor(Math.random() * colorKeys.length)];
-    const sprites = characterSprites[color];
+  const getImageSourceForKey = (key: string): string => {
+    const index = Math.floor(Math.random() * colorKeys.length)
+    const color = colorKeys[index];
 
-    const text = String(key).toLowerCase();
+    const sprites = assets.png.characters[color];
+    const text = key.toLowerCase();
 
     if (text.includes("alcohol") || text.includes("drink")) {
       return sprites.drunk;
@@ -32,11 +33,12 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
       return sprites.extreme;
     } else {
       const poses = [sprites.pose1, sprites.pose2];
-      return poses[Math.floor(Math.random() * poses.length)];
+      const poseIndex = Math.floor(Math.random() * poses.length);
+      return poses[poseIndex];
     }
   };
   
-  const [imageSource, setImageSource] = useState<ImageSourcePropType>(getImageSourceForKey(newTask.type));
+  const [imageSource, setImageSource] = useState<string>(getImageSourceForKey(newTask.type));
 
   const runAnimation = (from: typeof animation.initial, to: typeof animation.final, duration: number) => {
     positionY.setValue(from.position.y);

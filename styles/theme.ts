@@ -1,9 +1,19 @@
 // theme.js
 
+  // export const lightColors = {
+  //   primary: '#b14141',
+  //   secondary: '#ffe66d',
+  //   positive: '#4caf50',
+  //   background: '#fff7f0',
+  //   input: '#ffffff',
+  //   text: '#666',
+  //   textHover: '#777',
+  // };
+
   export const lightColors = {
-    primary: '#b14141',
-    secondary: '#ffe66d',
-    positive: '#4caf50',
+    primary: '#ad0568',
+    secondary: '#3280f3',
+    positive: '#47ffbd',
     background: '#fff7f0',
     input: '#ffffff',
     text: '#666',
@@ -42,7 +52,8 @@
   };
   
   export const Fonts = {
-    base: 'Fredoka',
+    // base: 'Fredoka',
+    base: 'SetiaHati',
   };
   
   export const BorderRadius = {

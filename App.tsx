@@ -11,6 +11,8 @@ function App() {
     (async () => {
       await Font.loadAsync({
         Fredoka: require('./src/assets/fonts/Fredoka.ttf'),
+        Arco: require('./src/assets/fonts/ARCO.ttf'),
+        SetiaHati: require('./src/assets/fonts/SetiaHati-Regular.ttf'),
       });
       setFontsLoaded(true);
     })();

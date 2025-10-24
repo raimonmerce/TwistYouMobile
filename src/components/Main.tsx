@@ -121,14 +121,14 @@ const Main: React.FC<MainProps> = ({}) => {
                     {(contentPage === 'players' || contentPage === 'settings') && (
                         <View style={styles.left}>
                         <ButtonHeader onPress={() => handleGoToPage('main')}>
-                            <Image source={assets.png.back} style={styles.icon} />
+                            <Image source={assets.png.icons.back} style={styles.icon} />
                         </ButtonHeader>
                         </View>
                     )}
                     {contentPage === 'main' && (
                         <View style={styles.left}>
                         <ButtonHeader onPress={() => handleGoToPage('landing')}>
-                            <Image source={assets.png.back} style={styles.icon} />
+                            <Image source={assets.png.icons.back} style={styles.icon} />
                         </ButtonHeader>
                         </View>
                     )}
@@ -139,14 +139,14 @@ const Main: React.FC<MainProps> = ({}) => {
                     {contentPage === 'main' && (
                         <View style={styles.right}>
                         <ButtonHeader onPress={() => handleGoToPage('settings')}>
-                            <Image source={assets.png.settings} style={styles.icon} />
+                            <Image source={assets.png.icons.settings} style={styles.icon} />
                         </ButtonHeader>
                         </View>
                     )}
                     {contentPage === 'game' && (
                         <View style={styles.right}>
                         <ButtonHeader onPress={handleExitClick}>
-                            <Image source={assets.png.close} style={styles.icon} />
+                            <Image source={assets.png.icons.close} style={styles.icon} />
                         </ButtonHeader>
                         </View>
                     )}

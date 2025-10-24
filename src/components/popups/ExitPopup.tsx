@@ -1,9 +1,10 @@
 import React from 'react';
-import { Modal, View, StyleSheet } from 'react-native';
+import { Modal, View, StyleSheet, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ButtonBase from '../commons/ButtonBase';
 import { BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
+import { assets } from '../../assets/assets';
 
 interface ExitPopupProps {
   onConfirm: () => void;
@@ -36,6 +37,12 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
       shadowRadius: 20,
       elevation: 5,
     },
+    image: {
+      width: 150,
+      height: 150,
+      resizeMode: "contain",
+      marginTop: 20
+    },
     message: {
       fontSize: 16,
       marginBottom: 20,
@@ -53,6 +60,7 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
       <View style={styles.overlay}>
         <View style={styles.popup}>
           <BaseText>{t('popup.confirmExit', 'Seguro que quieres salir del juego?')}</BaseText>
+          <Image source={assets.png.exit} style={styles.image} />
           <View style={styles.container}>
             <ButtonBase text={t('popup.exit', 'Salir')} onPress={onConfirm} />
             <ButtonBase text={t('popup.cancel', 'Cancelar')} onPress={onCancel} />

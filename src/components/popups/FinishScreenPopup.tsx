@@ -1,8 +1,10 @@
-import React from 'react';
-import { Modal, View, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Modal, View, StyleSheet, Animated, Easing, Image } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { H4, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
+import { assets } from '../../assets/assets';
+
 interface FinishScreenPopupProps {
   round: number;
   visible: boolean;
@@ -10,8 +12,32 @@ interface FinishScreenPopupProps {
 
 const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible }) => {
   const { t } = useTranslation();
-
   const { colors } = useTheme();
+
+  const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const pulse = Animated.loop(
+      Animated.sequence([
+        Animated.timing(scaleAnim, {
+          toValue: 1.1,
+          duration: 600,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(scaleAnim, {
+          toValue: 1,
+          duration: 600,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ])
+    );
+
+    pulse.start();
+
+    return () => pulse.stop();
+  }, [scaleAnim]);
   
   const styles = StyleSheet.create({
     overlay: {
@@ -33,7 +59,12 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
       shadowRadius: 20,
       elevation: 5,
       gap: 20
-    }
+    },
+    image: {
+      width: 150,
+      height: 150,
+      resizeMode: "contain"
+    },
   });
 
   return (
@@ -41,6 +72,13 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
       <View style={styles.overlay}>
         <View style={styles.popup}>
           <H4>{t('popup.gameFinished')}</H4>
+          <Animated.Image
+            source={assets.png.finish}
+            style={[
+              styles.image,
+              { transform: [{ scale: scaleAnim }] },
+            ]}
+          />
           <BaseText>
             {t('popup.roundsReached', 'You reached round')} {round}
           </BaseText>
