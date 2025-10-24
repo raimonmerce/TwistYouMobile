@@ -9,11 +9,12 @@ import { Task } from "../../types";
 
 interface GameProps {
   currentPlayer: string;
-  currentTask: Task;
+  currentTask: Task | null;
   round: number;
 }
 
 const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
+  if (!currentTask) return;
   const { t } = useTranslation();
 
   const mt1 = t('game.masterTasks.mt1');
