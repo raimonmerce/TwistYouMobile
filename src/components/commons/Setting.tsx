@@ -2,16 +2,25 @@ import React from 'react';
 import { View, Switch, StyleSheet } from 'react-native';
 import { H5, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
+import { assets } from '../../assets/assets';
+import { useSoundPlayer } from '../../hooks/useSoundPlayer';
 
 interface SettingProps {
   name: string;
   description: string;
   setValue: (value: boolean) => void;
   value: boolean;
+  soundKey?: keyof typeof assets.sounds;
 }
 
-const Setting: React.FC<SettingProps> = ({ name, description, setValue, value }) => {
+const Setting: React.FC<SettingProps> = ({ name, description, setValue, value, soundKey = 'settingsSound' }) => {
   const { colors } = useTheme();
+  const playSound = useSoundPlayer();
+
+  const handleValueChange = async (val : boolean) => {
+    await playSound(soundKey);
+    setValue(val);
+  };
 
   const styles = StyleSheet.create({
     setting: {
@@ -51,7 +60,7 @@ const Setting: React.FC<SettingProps> = ({ name, description, setValue, value })
       </View>
       <Switch
         value={value}
-        onValueChange={setValue}
+        onValueChange={handleValueChange}
         trackColor={{ false: colors.text, true: colors.secondary }}
         thumbColor={value ? colors.text : '#ccc'} 
         style={styles.switch}

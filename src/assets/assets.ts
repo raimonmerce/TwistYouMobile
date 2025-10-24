@@ -31,6 +31,14 @@ import blue2 from "./png/characters/blue/blue_2.png";
 import blueD from "./png/characters/blue/blue_d.png";
 import blueX from "./png/characters/blue/blue_x.png";
 
+// Sounds
+import click1 from "./sounds/click1.wav";
+import click2 from "./sounds/click2.wav";
+import impossible from "./sounds/impossible.wav";
+import settingsSound from "./sounds/settings.wav";
+import spin from "./sounds/spin.mp3";
+import victory from "./sounds/victory.mp3";
+
 export const assets = {
   png: {
     main: main,
@@ -67,5 +75,13 @@ export const assets = {
       close: close,
       settings: settings
     }
+  },
+  sounds: {
+    click1: click1,
+    click2: click2,
+    impossible: impossible,
+    settingsSound: settingsSound,
+    spin: spin,
+    victory: victory,
   }
 }

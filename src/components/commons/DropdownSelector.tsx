@@ -3,12 +3,16 @@ import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { H5, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
+import { assets } from '../../assets/assets';
+import { useSoundPlayer } from '../../hooks/useSoundPlayer';
+
 interface DropdownSelectorProps {
   name: string;
   description: string;
   items: { value: string; label: string }[];
   onChange: (value: string) => void;
   initialValue: string;
+  soundKey?: keyof typeof assets.sounds;
 }
 
 const DropdownSelector: React.FC<DropdownSelectorProps> = ({
@@ -17,8 +21,15 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
   items,
   onChange,
   initialValue,
+  soundKey = 'settingsSound' 
 }) => {
   const { colors } = useTheme();
+  const playSound = useSoundPlayer();
+
+  const handleOnChange = async (val : any) => {
+    await playSound(soundKey);
+    onChange(val);
+  };
     
   const styles = StyleSheet.create({
     container: {
@@ -67,7 +78,7 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
       <View style={styles.pickerWrapper}>
         <Picker
           selectedValue={initialValue}
-          onValueChange={(itemValue) => onChange(itemValue)}
+          onValueChange={(itemValue) => handleOnChange(itemValue)}
           style={styles.dropdown}
           dropdownIconColor={colors.text}
         >

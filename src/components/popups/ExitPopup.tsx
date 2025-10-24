@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal, View, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Modal, View, StyleSheet, Animated, Easing } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ButtonBase from '../commons/ButtonBase';
 import { BaseText } from '../commons/Text';
@@ -16,6 +16,31 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
   const { t } = useTranslation();
 
   const { colors } = useTheme();
+
+    const scaleAnim = useRef(new Animated.Value(1)).current;
+  
+    useEffect(() => {
+      const pulse = Animated.loop(
+        Animated.sequence([
+          Animated.timing(scaleAnim, {
+            toValue: 1.1,
+            duration: 600,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+          Animated.timing(scaleAnim, {
+            toValue: 1,
+            duration: 600,
+            easing: Easing.inOut(Easing.ease),
+            useNativeDriver: true,
+          }),
+        ])
+      );
+  
+      pulse.start();
+  
+      return () => pulse.stop();
+    }, [scaleAnim]);
   
   const styles = StyleSheet.create({
     overlay: {
@@ -60,9 +85,15 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
       <View style={styles.overlay}>
         <View style={styles.popup}>
           <BaseText>{t('popup.confirmExit', 'Seguro que quieres salir del juego?')}</BaseText>
-          <Image source={assets.png.exit} style={styles.image} />
+          <Animated.Image
+            source={assets.png.exit}
+            style={[
+              styles.image,
+              { transform: [{ scale: scaleAnim }] },
+            ]}
+          />
           <View style={styles.container}>
-            <ButtonBase text={t('popup.exit', 'Salir')} onPress={onConfirm} />
+            <ButtonBase text={t('popup.exit', 'Salir')} onPress={onConfirm} soundKey='impossible' />
             <ButtonBase text={t('popup.cancel', 'Cancelar')} onPress={onCancel} />
           </View>
         </View>

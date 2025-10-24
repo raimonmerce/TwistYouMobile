@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Animated, StyleSheet, ImageSourcePropType } from "react-native";
+import { Animated, StyleSheet } from "react-native";
 import { assets } from '../../assets/assets';
 import { characterAnimations } from "./characterAnimations";
 import { CharacterImageAnimation, Task } from "../../types";

@@ -163,8 +163,8 @@ const Main: React.FC<MainProps> = ({}) => {
                     )}
                     {contentPage === 'game' && (
                         <>
-                        <ButtonBase text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} />
-                        <ButtonBase text={t('footer.spin', 'Girar')} onPress={handleSpin} />
+                        <ButtonBase text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} soundKey='impossible' />
+                        <ButtonBase text={t('footer.spin', 'Girar')} onPress={handleSpin} soundKey='spin'/>
                         </>
                     )}
                     </Footer>

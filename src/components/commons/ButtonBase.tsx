@@ -2,14 +2,18 @@ import React from "react";
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { FontSizes, Fonts } from '../../../styles/theme';
 import { useTheme } from '../ThemeProvider';
+import { assets } from '../../assets/assets';
+import { useSoundPlayer } from '../../hooks/useSoundPlayer';
 
 interface ButtonBaseProps {
   onPress: () => void;
   text: string;
+  soundKey?: keyof typeof assets.sounds;
 }
 
-const ButtonBase: React.FC<ButtonBaseProps> = ({ onPress, text }) => {
+const ButtonBase: React.FC<ButtonBaseProps> = ({ onPress, text, soundKey = 'click2' }) => {
   const { colors } = useTheme();
+  const playSound = useSoundPlayer();
 
   const styles = StyleSheet.create({
     button: {
@@ -28,9 +32,14 @@ const ButtonBase: React.FC<ButtonBaseProps> = ({ onPress, text }) => {
       color: '#fff',
     }
   });
+
+  const handlePress = async () => {
+    await playSound(soundKey);
+    onPress();
+  };
   
   return (
-    <TouchableOpacity onPress={onPress} style={styles.button}>
+    <TouchableOpacity onPress={handlePress} style={styles.button}>
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );

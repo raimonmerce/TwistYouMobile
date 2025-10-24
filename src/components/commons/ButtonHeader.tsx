@@ -1,15 +1,25 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, ViewStyle, GestureResponderEvent } from 'react-native';
+import { assets } from '../../assets/assets';
+import { useSoundPlayer } from '../../hooks/useSoundPlayer';
 
 interface ButtonHeaderProps {
-  onPress: (event: GestureResponderEvent) => void;
+  onPress: () => void;
   children: React.ReactNode;
+  soundKey?: keyof typeof assets.sounds;
 }
 
-const ButtonHeader: React.FC<ButtonHeaderProps> = ({ onPress, children }) => {
+const ButtonHeader: React.FC<ButtonHeaderProps> = ({ onPress, children, soundKey = 'settingsSound'  }) => {
+
+  const playSound = useSoundPlayer();
+  
+  const handlePress = async () => {
+    await playSound(soundKey);
+    onPress();
+  };
 
   return (
-    <TouchableOpacity  style={styles.buttonHeader} onPress={onPress}>
+    <TouchableOpacity  style={styles.buttonHeader} onPress={handlePress}>
       {children}
     </TouchableOpacity >
   );

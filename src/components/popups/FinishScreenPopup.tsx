@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { Modal, View, StyleSheet, Animated, Easing, Image } from 'react-native';
+import { Modal, View, StyleSheet, Animated, Easing } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { H4, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
 import { assets } from '../../assets/assets';
+import { useSoundPlayer } from '../../hooks/useSoundPlayer';
 
 interface FinishScreenPopupProps {
   round: number;
@@ -13,8 +14,19 @@ interface FinishScreenPopupProps {
 const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible }) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const playSound = useSoundPlayer();
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const playVictory = async () => {
+      await playSound("victory");
+    };
+
+    if (visible) {
+      playVictory();
+    }
+  }, [visible]);
 
   useEffect(() => {
     const pulse = Animated.loop(
