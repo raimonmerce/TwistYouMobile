@@ -1,17 +1,19 @@
 import React, { useEffect, useRef } from 'react';
-import { Modal, View, StyleSheet, Animated, Easing } from 'react-native';
+import { Image, Modal, View, StyleSheet, Animated, Easing, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { H4, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
 import { assets } from '../../assets/assets';
 import { useSoundPlayer } from '../../hooks/useSoundPlayer';
+import ButtonHeader from '../commons/ButtonHeader';
 
 interface FinishScreenPopupProps {
   round: number;
+  onClose: () => void;
   visible: boolean;
 }
 
-const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible }) => {
+const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, visible }) => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const playSound = useSoundPlayer();
@@ -47,7 +49,6 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
     );
 
     pulse.start();
-
     return () => pulse.stop();
   }, [scaleAnim]);
   
@@ -77,12 +78,22 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
       height: 150,
       resizeMode: "contain"
     },
+    closeButton: {
+      position: 'absolute',
+      top: 10,
+      right: 10 
+    },
   });
 
   return (
     <Modal transparent={true} visible={visible} animationType="fade">
-      <View style={styles.overlay}>
-        <View style={styles.popup}>
+      <Pressable style={styles.overlay} onPress={onClose}>
+        <Pressable onPress={() => {}} style={styles.popup}>
+          <View style={styles.closeButton}>
+            <ButtonHeader onPress={onClose}>
+              <Image source={assets.png.icons.close} style={{ width: 24, height: 24 }} />
+            </ButtonHeader>
+          </View>
           <H4>{t('popup.gameFinished')}</H4>
           <Animated.Image
             source={assets.png.finish}
@@ -94,8 +105,8 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, visible })
           <BaseText>
             {t('popup.roundsReached', 'You reached round')} {round}
           </BaseText>
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 };

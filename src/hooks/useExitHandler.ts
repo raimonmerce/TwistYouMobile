@@ -15,12 +15,16 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
     setContentPage("landing");
   };
 
-  useEffect(() => {
-    if (showFinishScreen) {
-      const timer = setTimeout(() => setShowFinishScreen(false), POPUP_EXIT_TIMER);
-      return () => clearTimeout(timer);
-    }
-  }, [showFinishScreen]);
+  const handleCloseFinishScreen = () => {
+    setShowFinishScreen(false)
+  };
+
+  // useEffect(() => {
+  //   if (showFinishScreen) {
+  //     const timer = setTimeout(() => setShowFinishScreen(false), POPUP_EXIT_TIMER);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [showFinishScreen]);
 
   return {
     showExitPopup,
@@ -28,5 +32,6 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
     handleCancelExitGame,
     handleExitGame,
     showFinishScreen,
+    handleCloseFinishScreen
   };
 };

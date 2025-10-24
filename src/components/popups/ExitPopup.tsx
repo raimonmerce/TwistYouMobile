@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Modal, View, StyleSheet, Animated, Easing } from 'react-native';
+import { Modal, View, StyleSheet, Animated, Easing, Pressable } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import ButtonBase from '../commons/ButtonBase';
 import { BaseText } from '../commons/Text';
@@ -82,8 +82,8 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
 
   return (
     <Modal transparent={true} visible={visible} animationType="fade">
-      <View style={styles.overlay}>
-        <View style={styles.popup}>
+      <Pressable style={styles.overlay} onPress={onCancel}>
+        <Pressable onPress={() => {}} style={styles.popup}>
           <BaseText>{t('popup.confirmExit', 'Seguro que quieres salir del juego?')}</BaseText>
           <Animated.Image
             source={assets.png.exit}
@@ -96,8 +96,8 @@ const ExitPopup: React.FC<ExitPopupProps> = ({ onConfirm, onCancel, visible }) =
             <ButtonBase text={t('popup.exit', 'Salir')} onPress={onConfirm} soundKey='impossible' />
             <ButtonBase text={t('popup.cancel', 'Cancelar')} onPress={onCancel} />
           </View>
-        </View>
-      </View>
+        </Pressable>
+      </Pressable>
     </Modal>
   );
 };
