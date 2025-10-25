@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Animated, StyleSheet } from "react-native";
+import { Animated, StyleSheet, ImageSourcePropType } from "react-native";
 import { assets } from '../../assets/assets';
 import { characterAnimations } from "./characterAnimations";
 import { CharacterImageAnimation, Task } from "../../types";
@@ -10,7 +10,7 @@ interface AnimatedCharacterProps {
 
 const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
   const [animation, setAnimation] = useState<CharacterImageAnimation>(
-    characterAnimations.appearLeft
+    characterAnimations.bottomRight
   );
   const positionY = useRef(new Animated.Value(animation?.initial.position.y ?? 0)).current;
   const positionX = useRef(new Animated.Value(animation?.initial.position.x ?? 0)).current;
@@ -20,7 +20,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
 
   const colorKeys = ["yellow", "red", "green", "blue"] as const;
   
-  const getImageSourceForKey = (key: string): string => {
+  const getImageSourceForKey = (key: string): ImageSourcePropType  => {
     const index = Math.floor(Math.random() * colorKeys.length)
     const color = colorKeys[index];
 
@@ -38,7 +38,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
     }
   };
   
-  const [imageSource, setImageSource] = useState<string>(getImageSourceForKey(newTask.type));
+  const [imageSource, setImageSource] = useState<ImageSourcePropType>(getImageSourceForKey(newTask.type));
 
   const runAnimation = (from: typeof animation.initial, to: typeof animation.final, duration: number) => {
     positionY.setValue(from.position.y);
@@ -58,7 +58,7 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
 
   const animateOutThenIn = () => {
     if (!animation) return;
-    const { initial, final, duration } = animation;
+    const { initial, duration } = animation;
 
     Animated.parallel([
       Animated.timing(positionY, { toValue: initial.position.y, duration, useNativeDriver: true }),
@@ -92,21 +92,21 @@ const AnimatedCharacter: React.FC<AnimatedCharacterProps> = ({ newTask }) => {
 	});
 
 	return (
-		<Animated.Image
-			source={imageSource}
-			style={[
-				styles.image,
-				{
-					opacity,
-					transform: [
-							{ translateX: positionX },
-							{ translateY: positionY },
-							{ rotate: rotateInterpolate },
+    <Animated.Image
+      source={imageSource}
+      style={[
+        styles.image,
+        {
+          opacity,
+          transform: [
+              { translateX: positionX },
+              { translateY: positionY },
+              { rotate: rotateInterpolate },
               { scale: scale }
-					],
-				},
-			]}
-		/>
+          ],
+        },
+      ]}
+    />
 	);
 };
 

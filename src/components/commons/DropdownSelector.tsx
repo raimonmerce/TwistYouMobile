@@ -5,6 +5,7 @@ import { H5, BaseText } from '../commons/Text';
 import { useTheme } from '../ThemeProvider';
 import { assets } from '../../assets/assets';
 import { useSoundPlayer } from '../../hooks/useSoundPlayer';
+import { FontSizes, Fonts } from '../../../styles/theme';
 
 interface DropdownSelectorProps {
   name: string;
@@ -62,9 +63,11 @@ const DropdownSelector: React.FC<DropdownSelectorProps> = ({
     dropdown: {
       color: colors.text,
       fontSize: 16,
+      fontFamily: Fonts.base,
     },
     item: {
       color: colors.text,
+      fontFamily: Fonts.base,
       //backgroundColor: colors.background
     }
   });

@@ -44,7 +44,14 @@ const Main: React.FC<MainProps> = ({}) => {
         handleGoToPage
     } = useGameState();
 
-    const { showExitPopup, handleExitClick, handleCancelExitGame, handleExitGame, showFinishScreen } = useExitHandler(setContentPage);
+    const {
+        showExitPopup,
+        handleExitClick,
+        handleCancelExitGame, 
+        handleExitGame,
+        showFinishScreen,
+        handleCloseFinishScreen
+    } = useExitHandler(setContentPage);
     
     const { t } = useTranslation();
 
@@ -55,7 +62,7 @@ const Main: React.FC<MainProps> = ({}) => {
             case "players":
             return <Players players={players} setPlayers={setPlayers} />;
             case "game":
-            return <Game currentPlayer={players[currentPlayerIndex]} currentTask={currentTask} round={round} />;
+            return <Game nextPlayer={players[currentPlayerIndex]} nextTask={currentTask} nextRound={round} />;
             case "settings":
             return <Settings settings={settings} setSettings={setSettings}/>;
             default:
@@ -118,61 +125,61 @@ const Main: React.FC<MainProps> = ({}) => {
             ) : (
                 <View style={styles.main}>
                     <Header>
-                    {(contentPage === 'players' || contentPage === 'settings') && (
-                        <View style={styles.left}>
-                        <ButtonHeader onPress={() => handleGoToPage('main')}>
-                            <Image source={assets.png.icons.back} style={styles.icon} />
-                        </ButtonHeader>
+                        {(contentPage === 'players' || contentPage === 'settings') && (
+                            <View style={styles.left}>
+                            <ButtonHeader onPress={() => handleGoToPage('main')}>
+                                <Image source={assets.png.icons.back} style={styles.icon} />
+                            </ButtonHeader>
+                            </View>
+                        )}
+                        {contentPage === 'main' && (
+                            <View style={styles.left}>
+                            <ButtonHeader onPress={() => handleGoToPage('landing')}>
+                                <Image source={assets.png.icons.back} style={styles.icon} />
+                            </ButtonHeader>
+                            </View>
+                        )}
+                        <View style={styles.title}>
+                            <H2>TwistYou</H2>
                         </View>
-                    )}
-                    {contentPage === 'main' && (
-                        <View style={styles.left}>
-                        <ButtonHeader onPress={() => handleGoToPage('landing')}>
-                            <Image source={assets.png.icons.back} style={styles.icon} />
-                        </ButtonHeader>
-                        </View>
-                    )}
-                    <View style={styles.title}>
-                        <H2>TwistYou</H2>
-                    </View>
 
-                    {contentPage === 'main' && (
-                        <View style={styles.right}>
-                        <ButtonHeader onPress={() => handleGoToPage('settings')}>
-                            <Image source={assets.png.icons.settings} style={styles.icon} />
-                        </ButtonHeader>
-                        </View>
-                    )}
-                    {contentPage === 'game' && (
-                        <View style={styles.right}>
-                        <ButtonHeader onPress={handleExitClick}>
-                            <Image source={assets.png.icons.close} style={styles.icon} />
-                        </ButtonHeader>
-                        </View>
-                    )}
+                        {contentPage === 'main' && (
+                            <View style={styles.right}>
+                            <ButtonHeader onPress={() => handleGoToPage('settings')}>
+                                <Image source={assets.png.icons.settings} style={styles.icon} />
+                            </ButtonHeader>
+                            </View>
+                        )}
+                        {contentPage === 'game' && (
+                            <View style={styles.right}>
+                            <ButtonHeader onPress={handleExitClick}>
+                                <Image source={assets.png.icons.close} style={styles.icon} />
+                            </ButtonHeader>
+                            </View>
+                        )}
                     </Header>
 
                     <Content>{renderContent()}</Content>
 
                     <Footer>
-                    {contentPage === 'main' && (
-                        <ButtonBase text={t('footer.players', 'Jugar')} onPress={handlePlay} />
-                    )}
-                    {contentPage === 'players' && (
-                        <ButtonBase text={t('footer.start', 'Empezar')} onPress={handleStartGame} />
-                    )}
-                    {contentPage === 'game' && (
-                        <>
-                        <ButtonBase text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} soundKey='impossible' />
-                        <ButtonBase text={t('footer.spin', 'Girar')} onPress={handleSpin} soundKey='spin'/>
-                        </>
-                    )}
+                        {contentPage === 'main' && (
+                            <ButtonBase text={t('footer.players', 'Jugar')} onPress={handlePlay} />
+                        )}
+                        {contentPage === 'players' && (
+                            <ButtonBase text={t('footer.start', 'Empezar')} onPress={handleStartGame} />
+                        )}
+                        {contentPage === 'game' && (
+                            <>
+                            <ButtonBase text={t('footer.impossible', 'Imposible')} onPress={handleImpossible} soundKey='impossible' />
+                            <ButtonBase text={t('footer.spin', 'Girar')} onPress={handleSpin} soundKey='spin'/>
+                            </>
+                        )}
                     </Footer>
                 </View>
             )}
             
             {showExitPopup && <ExitPopup onConfirm={handleExitGame} onCancel={handleCancelExitGame} visible={showExitPopup}/>}
-            {showFinishScreen && <FinishScreenPopup round={round} visible={showFinishScreen}/>}
+            {showFinishScreen && <FinishScreenPopup round={round} onClose={handleCloseFinishScreen} visible={showFinishScreen}/>}
         </>
     );
 };

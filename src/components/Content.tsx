@@ -5,7 +5,16 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ children }) => {
-  return <View>{children}</View>;
+  return <View style={styles.container}>{children}</View>;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 128,
+    paddingBottom: 80,
+  },
+});
 
 export default Content;

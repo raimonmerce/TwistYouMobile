@@ -4,18 +4,21 @@ import AnimatedCharacter from '../animations/AnimatedCharacter';
 import { useTranslation } from 'react-i18next';
 import CameraCapture from '../commons/CameraButton';
 import { H2, H3, H4 } from '../commons/Text';
-import { useTheme } from '../ThemeProvider';
 import { Task } from "../../types";
 
 interface GameProps {
-  currentPlayer: string;
-  currentTask: Task | null;
-  round: number;
+  nextPlayer: string;
+  nextTask: Task | null;
+  nextRound: number | null;
 }
 
-const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
-  if (!currentTask) return;
+const Game: React.FC<GameProps> = ({ nextPlayer, nextTask, nextRound }) => {
+  if (!nextTask) return;
+
   const { t } = useTranslation();
+  const [currentRound, setCurrentRound] = useState<number | null>(null);
+  const [currentPlayer, setCurrentPlayer] = useState("");
+  const [currentTask, setCurrentTask] = useState<Task | null>(null);
 
   const mt1 = t('game.masterTasks.mt1');
   const mt2 = t('game.masterTasks.mt2');
@@ -30,32 +33,29 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
   const transPlayer = useRef(new Animated.Value(0)).current;
   const transTask = useRef(new Animated.Value(0)).current;
 
-  const animate = (fadeVal: Animated.Value, transVal: Animated.Value) => {
-    Animated.sequence([
-      Animated.parallel([
-        Animated.timing(fadeVal, {
-          toValue: 0,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-        Animated.timing(transVal, {
-          toValue: -50,
-          duration: 200,
-          useNativeDriver: true,
-        }),
-      ]),
-      Animated.parallel([
-        Animated.timing(transVal, {
-          toValue: 50,
-          duration: 0,
-          useNativeDriver: true,
-        }),
-        Animated.timing(fadeVal, {
-          toValue: 0,
-          duration: 0,
-          useNativeDriver: true,
-        }),
-      ]),
+  const animateSwap = (
+    fadeVal: Animated.Value,
+    transVal: Animated.Value,
+    setState: (val: any) => void,
+    newValue: any
+  ) => {
+    Animated.parallel([
+      Animated.timing(fadeVal, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.timing(transVal, {
+        toValue: -50,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      setState(newValue);
+
+      transVal.setValue(50);
+      fadeVal.setValue(0);
+
       Animated.parallel([
         Animated.timing(fadeVal, {
           toValue: 1,
@@ -67,21 +67,27 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
           duration: 300,
           useNativeDriver: true,
         }),
-      ]),
-    ]).start();
+      ]).start();
+    });
   };
 
   useEffect(() => {
-    animate(fadeRound, transRound);
-  }, [round]);
+    if (nextRound !== null && nextRound !== currentRound) {
+      animateSwap(fadeRound, transRound, setCurrentRound, nextRound);
+    }
+  }, [nextRound]);
 
   useEffect(() => {
-    animate(fadePlayer, transPlayer);
-  }, [currentPlayer]);
+    if (nextPlayer !== currentPlayer) {
+      animateSwap(fadePlayer, transPlayer, setCurrentPlayer, nextPlayer);
+    }
+  }, [nextPlayer]);
 
   useEffect(() => {
-    animate(fadeTask, transTask);
-  }, [currentTask]);
+    if (nextTask && nextTask !== currentTask) {
+      animateSwap(fadeTask, transTask, setCurrentTask, nextTask);
+    }
+  }, [nextTask]);
 
   const styles = StyleSheet.create({
     container: {
@@ -100,8 +106,8 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
   });
 
   return (
-    <View style={styles.container}>
-      <AnimatedCharacter newTask={currentTask} />
+    <View pointerEvents="none" style={styles.container}>
+      <AnimatedCharacter newTask={nextTask} />
 
       {/* Round */}
       <Animated.View
@@ -111,7 +117,7 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
           alignItems: "center",
         }}
       >
-        <H3>{t('game.round', 'Round')} {round}</H3>
+        {currentRound && (<H3>{t('game.round', 'Round')} {currentRound}</H3>)}
       </Animated.View>
 
       {/* Player */}
@@ -133,10 +139,10 @@ const Game: React.FC<GameProps> = ({ currentPlayer, currentTask, round }) => {
           alignItems: "center",
         }}
       >
-        <H4 style={styles.turnText}>{currentTask.text}</H4>
+        <H4 style={styles.turnText}>{currentTask?.text}</H4>
 
-        {currentTask.text === mt1 && <CameraCapture captureMode="environment" />}
-        {currentTask.text === mt2 && <CameraCapture captureMode="user" />}
+        {currentTask?.text === mt1 && <CameraCapture captureMode="environment" />}
+        {currentTask?.text === mt2 && <CameraCapture captureMode="user" />}
       </Animated.View>
     </View>
   );

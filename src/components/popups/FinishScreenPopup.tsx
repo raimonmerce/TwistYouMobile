@@ -83,6 +83,11 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, v
       top: 10,
       right: 10 
     },
+    icon: {
+      width: 24,
+      height: 24,
+      filter: 'invert(40%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%)'
+    },
   });
 
   return (
@@ -91,7 +96,7 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, v
         <Pressable onPress={() => {}} style={styles.popup}>
           <View style={styles.closeButton}>
             <ButtonHeader onPress={onClose}>
-              <Image source={assets.png.icons.close} style={{ width: 24, height: 24 }} />
+              <Image source={assets.png.icons.close} style={styles.icon}/>
             </ButtonHeader>
           </View>
           <H4>{t('popup.gameFinished')}</H4>

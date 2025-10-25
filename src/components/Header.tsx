@@ -11,11 +11,16 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   const styles = StyleSheet.create({
     header: {
-      position: 'relative',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
       height: 128,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: colors.background
+      backgroundColor: "transparent",
+      zIndex: 1000,
+      elevation: 1000,
     },
   });
   
