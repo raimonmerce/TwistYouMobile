@@ -178,8 +178,20 @@ const Main: React.FC<MainProps> = ({}) => {
                 </View>
             )}
             
-            {showExitPopup && <ExitPopup onConfirm={handleExitGame} onCancel={handleCancelExitGame} visible={showExitPopup}/>}
-            {showFinishScreen && <FinishScreenPopup round={round} onClose={handleCloseFinishScreen} visible={showFinishScreen}/>}
+            {showExitPopup && 
+                <ExitPopup 
+                    onConfirm={handleExitGame} 
+                    onCancel={handleCancelExitGame} 
+                    visible={showExitPopup}
+                />
+            }
+            {showFinishScreen && 
+                <FinishScreenPopup 
+                    round={round} 
+                    onClose={handleCloseFinishScreen} 
+                    visible={showFinishScreen}
+                />
+            }
         </>
     );
 };
