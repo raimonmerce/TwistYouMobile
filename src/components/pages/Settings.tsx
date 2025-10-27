@@ -4,6 +4,7 @@ import Setting from "../commons/Setting"
 import { useTranslation } from "react-i18next";
 import { useTheme } from '../ThemeProvider';
 import { GameSettings } from "../../types";
+import Credits from "./Credits";
 
 interface SettingsProps {
   setSettings: (value: GameSettings) => void;
@@ -57,6 +58,7 @@ const Settings: React.FC<SettingsProps> = ({
         })}
         value={settings.adultMode}
       />
+      <Credits/>
     </>
   );
 };

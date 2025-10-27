@@ -93,6 +93,15 @@ export const en = {
         "catalan": "Catalan",
         "english": "English"
     },
+    "credits" : {
+        "credits": "Credits",
+        "programmer": "Programming & Development",
+        "animation": "Animation & Sound",
+        "artwork": "Images & Artwork",
+        "ui": "UI/UX",
+        "trailer": "Trailer",
+        "thanks": "Thank you for playing! ❤️"
+    },
     "footer": {
         "play": "Play",
         "players": "Choose Players",

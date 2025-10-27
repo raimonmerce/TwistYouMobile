@@ -32,7 +32,6 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, v
     });
 
     const unsubscribeLoaded = appOpenAd.addAdEventListener(AdEventType.LOADED, () => {
-      console.log('AppOpenAd loaded');
       appOpenAd.show();
     });
 

@@ -94,6 +94,15 @@ export const cat = {
         "catalan": "Català",
         "english": "Inglès"
     },
+    "credits": {
+        "credits": "Crèdits",
+        "programmer": "Programació i Desenvolupament",
+        "animation": "Animació i So",
+        "artwork": "Imatges i Il·lustracions",
+        "ui": "UI/UX",
+        "trailer": "Tràiler",
+        "thanks": "Gràcies per jugar! ❤️"
+    },
     "footer": {
         "play": "Jugar",
         "players": "Selecciona Jugadors",
