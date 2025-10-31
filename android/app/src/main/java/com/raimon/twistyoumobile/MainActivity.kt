@@ -1,4 +1,4 @@
-package com.raimon.TwistYou
+package com.raimon.twistyoumobile
 
 import android.os.Build
 import android.os.Bundle

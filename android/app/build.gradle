@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.raimon.TwistYou'
+    namespace 'com.raimon.twistyoumobile'
     defaultConfig {
-        applicationId 'com.raimon.TwistYou'
+        applicationId 'com.raimon.twistyoumobile'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

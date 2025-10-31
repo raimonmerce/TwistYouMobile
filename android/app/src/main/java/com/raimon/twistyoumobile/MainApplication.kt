@@ -1,4 +1,4 @@
-package com.raimon.TwistYou
+package com.raimon.twistyoumobile
 
 import android.app.Application
 import android.content.res.Configuration

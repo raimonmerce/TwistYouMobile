@@ -20,12 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#88bdff"
       },
-      "package": "com.raimon.TwistYou",
-      "androidNavigationBar": {
-        "visible": "sticky-immersive",
-        "barStyle": "light-content",
-        "backgroundColor": "transparent"
-      }
+      "package": "com.raimon.twistyoumobile"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,6 +32,8 @@
       [
         "react-native-google-mobile-ads",
         {
+          "android_app_id": "ca-app-pub-5341979570890330~6608956204",
+          "ios_app_id": "ca-app-pub-5341979570890330~6608956204",
           "androidAppId": "ca-app-pub-5341979570890330~6608956204",
           "iosAppId": "ca-app-pub-5341979570890330~6608956204"
         }
