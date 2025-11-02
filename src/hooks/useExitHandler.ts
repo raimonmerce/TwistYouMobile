@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { Page } from "../types";
-import { AppOpenAd, TestIds, AdEventType } from 'react-native-google-mobile-ads';
+import { InterstitialAd, TestIds, AdEventType } from 'react-native-google-mobile-ads';
 
 export const useExitHandler = (setContentPage: (page: Page) => void) => {
   const [showExitPopup, setShowExitPopup] = useState(false);
@@ -9,22 +9,34 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   const [isAddLoaded, setIsAddLoaded] = useState(false);
   const [hasAddError, setHasAddError] = useState(false);
 
-  const adUnitId = __DEV__
-    ? TestIds.APP_OPEN
-    : 'ca-app-pub-5341979570890330/2010509293';
+  const interstitialId = __DEV__
+    ? 'ca-app-pub-9928721595446642/1870902325' //TestIds.APP_OPEN
+    : 'ca-app-pub-9928721595446642/1870902325';
 
-  const appOpenAdRef = useRef<AppOpenAd | null>(null);
+  const interstitialAdRef = useRef<InterstitialAd | null>(null);
   const isLoadedRef = useRef(false);
   const isShowingRef = { current: false };
 
-  if (!appOpenAdRef.current) {
-    appOpenAdRef.current = AppOpenAd.createForAdRequest(adUnitId, {
-      keywords: ['fashion', 'clothing'],
+  if (!interstitialAdRef.current) {
+    interstitialAdRef.current = InterstitialAd.createForAdRequest(interstitialId, {
+      keywords: [
+        'party games',
+        'friends',
+        'fun',
+        'social games',
+        'group games',
+        'truth or dare',
+        'quiz',
+        'casual games',
+        'entertainment',
+        'drinking game',
+        'multiplayer party',
+        'icebreaker',
+      ],
     });
   }
 
   const handleExitClick = () => {
-    console.log("handleExitClick")
     setShowExitPopup(true);
     loadAd();
   };
@@ -32,21 +44,18 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   const handleCancelExitGame = () => setShowExitPopup(false);
 
   const handleExitGame = () => {
-    console.log("showAd")
     setShowExitPopup(false);
     setContentPage("landing");
     showAd();
   };
 
   const handleCloseFinishScreen = () => {
-    console.log("handleCloseFinishScreen")
     setShowFinishScreen(false)
   };
 
   useEffect(() => {
-    const ad = appOpenAdRef.current!;
+    const ad = interstitialAdRef.current!;
     const onLoaded = () => {
-      console.log("onLoaded")
       if (isShowingRef.current) {
         return;
       }
@@ -54,12 +63,10 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
       setIsAddLoaded(true);
     };
     const onError = (error: any) => {
-      console.log("onError")
       console.warn('AppOpenAd error:', error);
       setHasAddError(true);
     };
     const onClosed = () => {
-      console.log("onClosed")
       setShowAddScreen(false);
       setShowFinishScreen(true)
       isLoadedRef.current = false;
@@ -76,15 +83,13 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   }, []);
 
   const loadAd = useCallback(() => {
-    console.log("loadAd")
-    const ad = appOpenAdRef.current!;
+    const ad = interstitialAdRef.current!;
     setHasAddError(false);
     ad.load();
   }, []);
 
   const showAd = useCallback(() => {
-    console.log("showAd")
-    const ad = appOpenAdRef.current!;
+    const ad = interstitialAdRef.current!;
     if (hasAddError) {
 
       setHasAddError(false);

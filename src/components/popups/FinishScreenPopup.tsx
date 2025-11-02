@@ -7,8 +7,6 @@ import { assets } from '../../assets/assets';
 import { useSoundPlayer } from '../../hooks/useSoundPlayer';
 import ButtonHeader from '../commons/ButtonHeader';
 
-import { AppOpenAd, TestIds, AdEventType } from 'react-native-google-mobile-ads';
-
 interface FinishScreenPopupProps {
   round: number;
   onClose: () => void;
@@ -21,31 +19,6 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, v
   const playSound = useSoundPlayer();
 
   const scaleAnim = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    const adUnitId = __DEV__
-      ? TestIds.APP_OPEN
-      : 'ca-app-pub-9928721595446642/1870902325';
-
-    const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
-      keywords: ['fashion', 'clothing'],
-    });
-
-    const unsubscribeLoaded = appOpenAd.addAdEventListener(AdEventType.LOADED, () => {
-      appOpenAd.show();
-    });
-
-    const unsubscribeError = appOpenAd.addAdEventListener(AdEventType.ERROR, (error) => {
-      console.log('AppOpenAd error:', error);
-    });
-
-    appOpenAd.load();
-
-    return () => {
-      unsubscribeLoaded();
-      unsubscribeError();
-    };
-  }, []);
 
   useEffect(() => {
     const playVictory = async () => {
