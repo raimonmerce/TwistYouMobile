@@ -24,6 +24,7 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   }
 
   const handleExitClick = () => {
+    console.log("handleExitClick")
     setShowExitPopup(true);
     loadAd();
   };
@@ -31,18 +32,21 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   const handleCancelExitGame = () => setShowExitPopup(false);
 
   const handleExitGame = () => {
+    console.log("showAd")
     setShowExitPopup(false);
     setContentPage("landing");
     showAd();
   };
 
   const handleCloseFinishScreen = () => {
+    console.log("handleCloseFinishScreen")
     setShowFinishScreen(false)
   };
 
   useEffect(() => {
     const ad = appOpenAdRef.current!;
     const onLoaded = () => {
+      console.log("onLoaded")
       if (isShowingRef.current) {
         return;
       }
@@ -50,10 +54,12 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
       setIsAddLoaded(true);
     };
     const onError = (error: any) => {
+      console.log("onError")
       console.warn('AppOpenAd error:', error);
       setHasAddError(true);
     };
     const onClosed = () => {
+      console.log("onClosed")
       setShowAddScreen(false);
       setShowFinishScreen(true)
       isLoadedRef.current = false;
@@ -70,14 +76,17 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   }, []);
 
   const loadAd = useCallback(() => {
+    console.log("loadAd")
     const ad = appOpenAdRef.current!;
     setHasAddError(false);
     ad.load();
   }, []);
 
   const showAd = useCallback(() => {
+    console.log("showAd")
     const ad = appOpenAdRef.current!;
     if (hasAddError) {
+
       setHasAddError(false);
       setShowFinishScreen(true)
       return;
