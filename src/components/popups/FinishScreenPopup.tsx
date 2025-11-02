@@ -25,7 +25,7 @@ const FinishScreenPopup: React.FC<FinishScreenPopupProps> = ({ round, onClose, v
   useEffect(() => {
     const adUnitId = __DEV__
       ? TestIds.APP_OPEN
-      : 'ca-app-pub-5341979570890330/2010509293';
+      : 'ca-app-pub-9928721595446642/1870902325';
 
     const appOpenAd = AppOpenAd.createForAdRequest(adUnitId, {
       keywords: ['fashion', 'clothing'],

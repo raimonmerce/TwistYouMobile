@@ -18,3 +18,9 @@ android/app/build/outputs/bundle/release/app-release.aab
 
 apk local testing:
 android/app/build/outputs/apk/release/app-release.apk
+
+build.gradle:
+    lint {
+        disable 'Instantiatable'
+        abortOnError false
+    }
