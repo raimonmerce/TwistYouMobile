@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#88bdff"
       },
-      "package": "com.raimon.twistyoumobile"
+      "package": "com.raimon.twistyoumobile",
+      "versionCode": 1 
     },
     "web": {
       "favicon": "./assets/favicon.png"
