@@ -38,8 +38,11 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
 
   const handleExitClick = () => {
     setShowExitPopup(true);
-    loadAd();
   };
+
+  const handleLoadAd = () => {
+    loadAd();
+  }
 
   const handleCancelExitGame = () => setShowExitPopup(false);
 
@@ -106,6 +109,7 @@ export const useExitHandler = (setContentPage: (page: Page) => void) => {
   return {
     showExitPopup,
     handleExitClick,
+    handleLoadAd,
     handleCancelExitGame,
     handleExitGame,
     showFinishScreen,

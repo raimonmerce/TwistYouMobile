@@ -50,7 +50,8 @@ const Main: React.FC<MainProps> = ({}) => {
         handleCancelExitGame, 
         handleExitGame,
         showFinishScreen,
-        handleCloseFinishScreen
+        handleCloseFinishScreen,
+        handleLoadAd
     } = useExitHandler(setContentPage);
     
     const { t } = useTranslation();
@@ -71,6 +72,11 @@ const Main: React.FC<MainProps> = ({}) => {
     };
 
     const { colors } = useTheme();
+
+    const handleStartGameAndPreload = () => {
+        handleLoadAd();
+        handleStartGame();
+    };
 
     useEffect(() => {
         const backAction = () => {
@@ -166,7 +172,7 @@ const Main: React.FC<MainProps> = ({}) => {
                             <ButtonBase text={t('footer.players', 'Jugar')} onPress={handlePlay} />
                         )}
                         {contentPage === 'players' && (
-                            <ButtonBase text={t('footer.start', 'Empezar')} onPress={handleStartGame} />
+                            <ButtonBase text={t('footer.start', 'Empezar')} onPress={handleStartGameAndPreload} />
                         )}
                         {contentPage === 'game' && (
                             <>
