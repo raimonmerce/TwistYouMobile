@@ -10,13 +10,13 @@ local.properties: sdk.dir=C:\\Users\\raimo\\AppData\\Local\\Android\\Sdk
 //Generate build
 ./gradlew clean
 ./gradlew --stop
-./gradlew assembleRelease
-./gradlew bundleRelease
 
 aab for playstore:
+./gradlew bundleRelease
 android/app/build/outputs/bundle/release/app-release.aab
 
 apk local testing:
+./gradlew assembleRelease
 android/app/build/outputs/apk/release/app-release.apk
 
 build.gradle:
