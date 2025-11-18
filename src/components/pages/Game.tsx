@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { View, StyleSheet, Animated } from "react-native";
 import AnimatedCharacter from '../animations/AnimatedCharacter';
 import { useTranslation } from 'react-i18next';
-import CameraCapture from '../commons/CameraButton';
+// import CameraCapture from '../commons/CameraButton';
 import { H2, H3, H4 } from '../commons/Text';
 import { Task } from "../../types";
 
@@ -20,10 +20,10 @@ const Game: React.FC<GameProps> = ({ nextPlayer, nextTask, nextRound }) => {
   const [currentPlayer, setCurrentPlayer] = useState("");
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
 
-  const mt1 = t('game.masterTasks.mt1');
-  const mt2 = t('game.masterTasks.mt2');
+  // const mt1 = t('game.masterTasks.mt1');
+  // const mt2 = t('game.masterTasks.mt2');
 
-  if (!mt1 || !mt2) return null; 
+  // if (!mt1 || !mt2) return null; 
 
   const fadeRound = useRef(new Animated.Value(1)).current;
   const fadePlayer = useRef(new Animated.Value(1)).current;
@@ -141,8 +141,8 @@ const Game: React.FC<GameProps> = ({ nextPlayer, nextTask, nextRound }) => {
       >
         <H4 style={styles.turnText}>{currentTask?.text}</H4>
 
-        {currentTask?.text === mt1 && <CameraCapture captureMode="environment" />}
-        {currentTask?.text === mt2 && <CameraCapture captureMode="user" />}
+        {/* {currentTask?.text === mt1 && <CameraCapture captureMode="environment" />}
+        {currentTask?.text === mt2 && <CameraCapture captureMode="user" />} */}
       </Animated.View>
     </View>
   );

@@ -30,8 +30,8 @@ const extremeTasks = [
 ];
 
 const masterTasks = [
-    "game.masterTasks.mt1",
-    "game.masterTasks.mt2",
+    // "game.masterTasks.mt1",
+    // "game.masterTasks.mt2",
     "game.masterTasks.mt3",
     "game.masterTasks.mt4",
 ];

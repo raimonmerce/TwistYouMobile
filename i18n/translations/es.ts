@@ -56,8 +56,8 @@ export const es = {
         "et9": "Todos fingen orgasmo a la vez"
         },
         "masterTasks" : {
-        "mt1": "Haz una foto de la escena 📸",
-        "mt2": "Haz una selfie de la escena 📸",
+        // "mt1": "Haz una foto de la escena 📸",
+        // "mt2": "Haz una selfie de la escena 📸",
         "mt3": "Decide que jugador toca con $part a $part2 de $player",
         "mt4": "Inventate una nova norma"
         },

@@ -57,8 +57,8 @@ export const cat = {
             "et9": "Tots fingeixen un orgasme a la vegada"
         },
         "masterTasks" : {
-            "mt1": "Fes una foto de l'escena 📸",
-            "mt2": "Fes una selfie de l'a 'escena 📸",
+            // "mt1": "Fes una foto de l'escena 📸",
+            // "mt2": "Fes una selfie de l'a 'escena 📸",
             "mt3": "Decideix quin jugador toca amb $part a $part2 de $player",
             "mt4": "Inventat una nova norma"
         },
